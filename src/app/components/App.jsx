@@ -8,10 +8,10 @@ import Main from './main/Main';
 
 export default function App() {
   return (
-    <Flex h="100vh" direction="column">
+    <Flex h="100vh" maxH="100vh" direction="column">
       <Toolbar />
-      <Flex h="100%">
-        <Sidebar />
+      <Flex flex="1" maxH="100%">
+        {/* <Sidebar /> */}
         <Main />
       </Flex>
     </Flex>

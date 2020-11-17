@@ -11,6 +11,9 @@ module.exports = {
     'src/server/**/*',
   ],
   plugins: ['@snowpack/plugin-react-refresh', '@snowpack/plugin-dotenv'],
-  install: ['@chakra-ui/react'],
+  installOptions: {
+    polyfillNode: true,
+  },
+  install: ['@chakra-ui/react', '@chakra-ui/icons', 'styled-components'],
   // TODO: complete the proxy setup and mount correctly
 };

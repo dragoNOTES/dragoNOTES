@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/server/server.js && wait-on tcp:3000 && snowpack dev",
+    "start": "npm-run-all -p start:api wait-web",
+    "start:api": "nodemon ./src/server/server.js",
+    "start:web": "snowpack dev",
+    "wait-web": "wait-on tcp:3000 && npm run start:web",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,7 +33,9 @@
     "wait-on": "^5.2.0"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.0",
     "@chakra-ui/react": "^1.0.0",
+    "@chakra-ui/transition": "^1.0.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@reduxjs/toolkit": "^1.4.0",
@@ -39,7 +44,13 @@
     "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-markdown": "^5.0.2",
     "react-redux": "^7.2.2",
-    "redux": "^4.0.5"
+    "react-syntax-highlighter": "^15.3.0",
+    "redux": "^4.0.5",
+    "remark-gfm": "^1.0.0",
+    "slate": "^0.59.0",
+    "slate-react": "^0.59.0",
+    "styled-components": "^5.2.1"
   }
 }
