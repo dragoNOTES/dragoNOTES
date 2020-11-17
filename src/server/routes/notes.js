@@ -2,24 +2,41 @@ const express = require('express');
 
 const router = express.Router();
 
+const notesController = require('../controllers/notesController');
 
-router.post('/', (req, res) => {
+router.post('/', 
+  notesController.addNote,
+  (req, res) => {
+    res.sendStatus(200);
+  })
+
+// are we ever actually just grabbing a random note?
+router.get('/:noteId', 
+  notesController.getNote,
+  (req, res) => {
   
-})
+  })
 
-router.get('/:id', (req, res) => {
+router.get('?resource=resouceId', 
+  notesController.getResourceNotes,
+  (req, res) => {
+    res.status(200).json({resourceNotes: resourceNotes})
+  })
 
-})
+router.get('/pinned/:username', 
+  notesController.getPinnedNotes,
+  (req, res) => {
+    res.status(200).json({pinnedNotes: pinnedNotes})
+  })
 
-router.get('/pinned', (req, res) => {
+router.get('/owned/:username', 
+  notesController.getOwnedNotes,
+  (req, res) => {
+    res.status(200).json({ownedNotes: ownedNotes})
+  })
 
-})
-
-
-router.get('/owned', (req, res) => {
-
-})
-
-router.update(':id', (req, res) => {
-
-})
+router.put('/:noteId', 
+  notesController.updateNote,
+  (req, res) => {
+    res.sendStatus(200);
+  })

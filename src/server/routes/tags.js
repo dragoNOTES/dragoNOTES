@@ -2,24 +2,32 @@ const express = require('express');
 
 const router = express.Router();
 
-
-router.get('/', (req, res) => {
-
-})
-
-router.post('/', (req, res) => {
-
-})
-
-router.delete('/:id', (req, res) => {
-
-})
+const tagsController = require('../controllers/tagsController');
 
 
-// ASK SAM what we're doing with this one...?
-router.get('/pinned', (req, res) => {
+router.get('/',
+  tagsController.getTags,
+  (req, res) => {
+    res.status(200).json({tags: res.locals.tags});
+  });
 
-})
+router.get('/pinned/:userId', 
+  tagsController.getPinnedTags,
+  (req, res) => {
+    res.status(200).json({pinnedTags: res.locals.pinnedTags})
+  });
+
+router.post('/',
+  tagsController.addNewTag,
+  (req, res) => {
+    res.sendStatus(200);
+  });
+
+router.delete('?tag=tagId&resource=resourceId',
+  tagsController.removeTagFromResource,
+  (req, res) => {
+    res.sendStatus(200);
+  });
 
 
 
