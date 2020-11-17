@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
     ...err,
   };
 
-  console.log(errObj.log);
+  console.log(errObj.log, errObj.error);
   return res.status(errObj.status).json(errObj.message);
 });
 
