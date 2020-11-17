@@ -4,11 +4,6 @@ const app = express();
 const PORT = 3000;
 
 
-
-
-
-
-
 // TO DO: make sure this file structure is correct
 // static file serving if in production
 if (process.env.NODE_ENV === 'production') {
