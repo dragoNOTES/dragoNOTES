@@ -6,6 +6,18 @@ const PORT = 3000;
 
 
 
+
+
+
+// TO DO: make sure this file structure is correct
+// static file serving if in production
+if (process.env.NODE_ENV === 'production') {
+  app.use('/build', express.static(path.resolve(__dirname, './_dist_')));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../index.html'));
+  });
+}
+
 // catch-all route handler
 app.use('*', (req, res) => (res.sendStatus(404)));
 
