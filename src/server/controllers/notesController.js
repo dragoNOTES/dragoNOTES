@@ -4,12 +4,10 @@ const notesController = {}
 
 notesController.addNote = (req, res, next) => {
   // create with body.resourceId and body.noteBody
-  
 }
 
 notesController.getNote = (req, res, next) => {
   // get with body.params.noteId
-  
 }
 
 notesController.getResourceNotes = (req, res, next) => {
@@ -27,8 +25,6 @@ notesController.getOwnedNotes = (req, res, next) => {
 notesController.updateNote = (req, res, next) => {
   //update with params.noteId
 }
-
-
 
 
 module.exports = notesController;

@@ -16,7 +16,7 @@ router.get('/',
   notesController.getPinnedNotes,
   resourcesController.getOwnedResources,
   (req, res) => {
-    return res.status(200).json({ 
+      res.status(200).json({ 
       pinnedTags: res.locals.pinnedTags,
       pinnedResources: res.locals.pinnedResources,
       pinnedNotes: res.locals.pinnedNotes,

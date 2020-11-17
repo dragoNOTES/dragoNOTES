@@ -14,7 +14,7 @@ router.post('/',
 router.get('/:noteId', 
   notesController.getNote,
   (req, res) => {
-  
+    res.sendStatus(200)
   })
 
 router.get('?resource=resouceId', 
