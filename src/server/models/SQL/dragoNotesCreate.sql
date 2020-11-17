@@ -25,8 +25,8 @@ CREATE TABLE  public.resources (
 	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "link" varchar NOT NULL,
   "title" varchar NOT NULL,
-  "num_notes" int,
-  "num_pinned" int,
+  "num_notes" int DEFAULT 0,
+  "num_pinned" int DEFAULT 0,
   "owner_id" bigint NOT NULL,
 	CONSTRAINT "resources_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "resources_fk0" FOREIGN KEY ("owner_id") REFERENCES public.users("_id")
@@ -41,7 +41,7 @@ CREATE TABLE  public.user_pinned_resources (
   UNIQUE ("user_id", "resource_id"),
 	CONSTRAINT "user_pinned_resources_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "user_pinned_resources_fk0" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
-  CONSTRAINT "user_pinned_resources_fk1" FOREIGN KEY ("resource_id") REFERENCES public.resources("_id")
+  CONSTRAINT "user_pinned_resources_fk1" FOREIGN KEY ("resource_id") REFERENCES public.resources("_id") ON DELETE CASCADE
 ) WITH (
   OIDS=FALSE
 );
@@ -66,7 +66,7 @@ CREATE TABLE  public.user_pinned_notes (
   UNIQUE ("user_id", "notes_id"),
 	CONSTRAINT "user_pinned_notes_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "user_pinned_notes_fk0" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
-  CONSTRAINT "user_pinned_notes_fk1" FOREIGN KEY ("notes_id") REFERENCES public.notes("_id")
+  CONSTRAINT "user_pinned_notes_fk1" FOREIGN KEY ("notes_id") REFERENCES public.notes("_id") ON DELETE CASCADE
 ) WITH (
   OIDS=FALSE
 );
@@ -74,6 +74,7 @@ CREATE TABLE  public.user_pinned_notes (
 CREATE TABLE  public.tags (
 	"_id" serial NOT NULL,
   "name" varchar NOT NULL,
+  UNIQUE ("name"),
 	CONSTRAINT "tags_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
@@ -86,7 +87,7 @@ CREATE TABLE  public.user_pinned_tags (
   UNIQUE ("user_id", "tags_id"),
 	CONSTRAINT "user_pinned_tags_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "user_pinned_tags_fk0" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
-  CONSTRAINT "user_pinned_tags_fk1" FOREIGN KEY ("tags_id") REFERENCES public.tags("_id")
+  CONSTRAINT "user_pinned_tags_fk1" FOREIGN KEY ("tags_id") REFERENCES public.tags("_id") ON DELETE CASCADE
 ) WITH (
   OIDS=FALSE
 );
