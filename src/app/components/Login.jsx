@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Box } from '@chakra-ui/react';
 import {
+  Box,
   Center,
   Square,
   Circle,
@@ -16,7 +16,7 @@ export default class Login extends Component {
   render() {
     return (
       <Container>
-        <Box bg="tomato" w="100%" p={10} color="white">
+        <Box bg="blue.50" w="100%" p={10} color="white">
           <Container>
             <Center>
               <VStack>
