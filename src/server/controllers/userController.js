@@ -1,18 +1,22 @@
-/** 
- * TODOs
- * 
- * - Add user authentication/authoriztion
- */
-
-const usersController = {};
+const db = require('../models/dragoNotesModel');
 
 
-usersController.addUser = (req, res, next) => {
+const userController = {};
 
+userController.addUser = (req, res, next) => {
+  const { username, name, userId, avatar} = res.locals;
+  
+  const query = `
+    INSERT INTO users (username, name, github_id, avatar) 
+    VALUES ($1, $2, $3, $4)
+    ON CONFLICT DO NOTHING;
+  `
+  db.query(query, [username, name, userId, avatar])
+    .then(() => next())
+    .catch((error) => next({
+      error,
+      log: `Error in userController addUser`,
+    }));
 }
 
-usersController.getOwnedResources = (req, res, next) => {
-
-}
-
-module.exports = usersController; 
+module.exports = userController; 
