@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 --TO DO: 
 --  update a note with time updated too
 --  update numNotes and numPinned on resources when updated
 --  delete a resource when it has no notes
 
-=======
->>>>>>> ed7e40dd4d021f50c762986417bcc953c13afd59
 
 -- insert user
 INSERT INTO users (username, first_name, last_name) 
@@ -24,12 +21,9 @@ INSERT INTO tags (name)
   VALUES ($1)
   ON CONFLICT DO NOTHING;
 
-<<<<<<< HEAD
 -- get a tag
 SELECT * FROM tags WHERE name = $1;
 
-=======
->>>>>>> ed7e40dd4d021f50c762986417bcc953c13afd59
 -- get all tags
 SELECT name FROM tags;
 
@@ -135,7 +129,6 @@ INSERT INTO user_pinned_resources (user_id, resource_id)
 -- unpin a resource
 DELETE FROM user_pinned_resources
   WHERE user_id = (SELECT _id FROM users WHERE username = $1)
-<<<<<<< HEAD
   AND resource_id = $2;
 
 -- increment a resource's num_pinned
@@ -157,6 +150,3 @@ UPDATE resources
 UPDATE resources
   SET num_notes = CASE WHEN num_notes < 1 THEN 0 ELSE num_notes - 1 END
   WHERE _id=$1
-=======
-  AND resource_id = $2;
->>>>>>> ed7e40dd4d021f50c762986417bcc953c13afd59
