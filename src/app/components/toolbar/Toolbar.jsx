@@ -6,7 +6,7 @@ import { Flex, Text, Heading } from '@chakra-ui/react';
 
 export default function Toolbar() {
   return (
-    <Flex h="60px" align="center" bg="gray.500" >
+    <Flex h="60px" align="center" bg="gray.900" >
       <Flex w="400px" >
         <Text fontSize="3xl"> 🐉 </Text>
         <Heading as="h2" size="xl"> DragoNotes </Heading>
