@@ -11,8 +11,33 @@ import {
   VStack,
   Input,
 } from '@chakra-ui/react';
+import { PanSession } from 'framer-motion/types/gestures/PanSession';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+  }
+
+  // app.get('/login/github', (req, res) => {
+  //   const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/login/github/callback`;
+  //   res.redirect(url);
+  // });
+
+  componentDidMount() {
+    this.loginFetch();
+  }
+
+  loginFetch() {
+    const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/login/github/callback`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((parsedJSON) => console.log(parsedJSON.results))
+      .catch((error) => console.log('parsing failed', error));
+  }
+
   render() {
     return (
       <Container>

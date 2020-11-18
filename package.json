@@ -8,7 +8,7 @@
     "start": "nodemon ./src/server/server.js && wait-on tcp:3000 && snowpack dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dragoNOTES/dragoNOTES.git"

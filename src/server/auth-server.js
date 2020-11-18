@@ -1,11 +1,9 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
-import fetch from 'node-fetch';
-import cookieSession from 'cookie-session';
+const fetch = require('node-fetch');
+const cookieSession = require('cookie-session');
 const app = express();
 
 // SECRET KEYS needed for GitHub OAuth located in .env
@@ -16,6 +14,7 @@ const cookie_secret = process.env.COOKIE_SECRET;
 
 // creates a session cookie using DRAGONOTES cookie_secret
 // that is in the .env file
+// no database is required because data is stored in encrypted cookie
 
 app.use(
   cookieSession({
@@ -33,8 +32,9 @@ app.get('/', (req, res) => {
 
 // LOGIN W/ GITHUB: when button is clicked, user is redirected
 // to GitHub with DRAGONOTES client_id provided from .env
+
 app.get('/login/github', (req, res) => {
-  const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/login/github/callback`;
+  const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:8080/login/github/callback`;
   res.redirect(url);
 });
 
@@ -55,6 +55,7 @@ async function getAccessToken(code) {
     }),
   });
   const data = await res.text();
+  console.log(data);
   const params = new URLSearchParams(data);
   return params.get('access_token');
 }
@@ -80,9 +81,10 @@ app.get('/login/github/callback', async (req, res) => {
   const token = await getAccessToken(code);
   const githubData = await getGithubUser(token);
   if (githubData) {
+    console.log('this is the githubdata:', githubData);
     req.session.githubId = githubData.id;
     req.session.token = token;
-    res.redirect('/admin');
+    res.redirect(`/admin?code=${code}`);
   } else {
     console.log('Error');
     res.send('Error happened');
@@ -93,7 +95,7 @@ app.get('/login/github/callback', async (req, res) => {
 // otherwise give them a link that redirects them to the login
 
 app.get('/admin', (req, res) => {
-  if (req.session.githubId === 66573803) {
+  if (req.session.githubId === req.query.code) {
     res.send(`Hey Jon <pre>${JSON.stringify(req.session)}`);
   } else {
     res.send('Not authorized, <a href="/login/github">login</a>');
@@ -108,5 +110,6 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-const PORT = process.env.PORT || 9000;
-app.listen(PORT, () => console.log('Listening on Port 9000'));
+// listening on PORT 9000
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log('Listening on Port 8080'));
