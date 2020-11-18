@@ -41,7 +41,7 @@ CREATE TABLE  public.user_pinned_resources (
   UNIQUE ("user_id", "resource_id"),
 	CONSTRAINT "user_pinned_resources_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "user_pinned_resources_fk0" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
-  CONSTRAINT "user_pinned_resources_fk1" FOREIGN KEY ("resource_id") REFERENCES public.resources("_id")
+  CONSTRAINT "user_pinned_resources_fk1" FOREIGN KEY ("resource_id") REFERENCES public.resources("_id") ON DELETE CASCADE
 ) WITH (
   OIDS=FALSE
 );
@@ -87,7 +87,7 @@ CREATE TABLE  public.user_pinned_tags (
   UNIQUE ("user_id", "tags_id"),
 	CONSTRAINT "user_pinned_tags_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "user_pinned_tags_fk0" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
-  CONSTRAINT "user_pinned_tags_fk1" FOREIGN KEY ("tags_id") REFERENCES public.tags("_id")
+  CONSTRAINT "user_pinned_tags_fk1" FOREIGN KEY ("tags_id") REFERENCES public.tags("_id") ON DELETE CASCADE
 ) WITH (
   OIDS=FALSE
 );

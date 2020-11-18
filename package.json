@@ -6,6 +6,7 @@
   "scripts": {
     "start-server": "nodemon ./src/server/server.js",
     "start": "nodemon ./src/server/server.js && wait-on tcp:3000 && snowpack dev",
+    "start-server": "nodemon ./src/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-
 const apiRouter = require('./routes/api.js');
 const notesRouter = require('./routes/notes.js');
 const resourcesRouter = require('./routes/resources.js');
@@ -20,6 +19,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../index.html'));
   });
 }
+
 
 /** 
  * Define route handlers
