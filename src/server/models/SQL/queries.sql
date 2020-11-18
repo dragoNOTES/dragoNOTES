@@ -1,3 +1,7 @@
+--TO DO: 
+--  update a note with time updated too
+--  able to delete a resource when it has no notes
+
 
 -- insert user
 INSERT INTO users (username, first_name, last_name) 
@@ -15,6 +19,9 @@ SELECT _id FROM users WHERE username=$1;
 INSERT INTO tags (name) 
   VALUES ($1)
   ON CONFLICT DO NOTHING;
+
+-- get a tag
+SELECT * FROM tags WHERE name = $1;
 
 -- get all tags
 SELECT name FROM tags;
@@ -49,6 +56,12 @@ DELETE FROM tags t
 INSERT INTO notes (content, owner_id, resource_id)
   VALUES ($1, $2, $3);
 
+-- update a note
+UPDATE notes 
+  SET content = $1
+  WHERE _id = $2 
+  AND owner_id = (SELECT _id FROM users WHERE username = $3);
+
 -- delete a note
 DELETE FROM notes WHERE _id = $1;
 
@@ -77,7 +90,6 @@ DELETE FROM user_pinned_notes
   WHERE user_id = (SELECT _id FROM users WHERE username = $1)
   AND notes_id = $2;
 
-
 --------- RESOURCES
 
 -- add a resource
@@ -89,6 +101,9 @@ INSERT INTO resources (link, title, owner_id, num_notes, num_pinned)
 
 -- get a single resource
 SELECT * FROM resources WHERE _id=$1
+
+-- get all user's owned resources (DONE)
+SELECT * FROM resources WHERE owner_id = (SELECT _id FROM users WHERE username = $1);
 
 -- tag a resource
 INSERT INTO tagged_resources (resource_id, tags_id)
@@ -122,3 +137,23 @@ INSERT INTO user_pinned_resources (user_id, resource_id)
 DELETE FROM user_pinned_resources
   WHERE user_id = (SELECT _id FROM users WHERE username = $1)
   AND resource_id = $2;
+
+-- increment a resource's num_pinned
+UPDATE resources 
+  SET num_pinned = num_pinned + 1
+  WHERE _id=$1
+
+-- decrement a resource's num_pinned
+UPDATE resources
+  SET num_pinned = CASE WHEN num_pinned < 1 THEN 0 ELSE num_pinned - 1 END
+  WHERE _id=$1
+
+-- increment a resource's num_notes
+UPDATE resources 
+  SET num_notes = num_notes + 1
+  WHERE _id=$1
+
+-- decrement a resource's num_notes
+UPDATE resources
+  SET num_notes = CASE WHEN num_notes < 1 THEN 0 ELSE num_notes - 1 END
+  WHERE _id=$1

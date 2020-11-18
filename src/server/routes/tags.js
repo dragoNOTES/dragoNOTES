@@ -17,13 +17,26 @@ router.get('/pinned/:userId',
     res.status(200).json({pinnedTags: res.locals.pinnedTags})
   });
 
-router.post('/',
-  tagsController.addNewTag,
+router.post('/pinned/:tag',
+  tagsController.pinTag,
   (req, res) => {
     res.sendStatus(200);
   });
 
-router.delete('/?tag=tagId&resource=resourceId',
+router.delete('/pinned/:tag',
+  tagsController.unpinTag,
+  (req, res) => {
+    res.sendStatus(200);
+  });
+
+router.post('/',
+  tagsController.addNewTag,
+  tagsControllr.addTagToResource,
+  (req, res) => {
+    res.sendStatus(200);
+  });
+
+router.delete('/:tag',
   tagsController.removeTagFromResource,
   (req, res) => {
     res.sendStatus(200);
