@@ -3,10 +3,9 @@ const db = require('../models/dragoNotesModel');
 const notesController = {}
 
 notesController.addNote = async (req, res, next) => {
-  // create with body.resourceId and body.noteBody
+  
   const { resourceId, noteBody } = req.body;
-  // get from session
-  let userName;
+  const { username } = res.locals;
 
   const query = `
     INSERT INTO notes (content, owner_id, resource_id)
@@ -69,7 +68,7 @@ notesController.getResourceNotes = async (req, res, next) => {
 
 notesController.getPinnedNotes = async (req, res, next) => {
   // get with params.username
-  let userName;
+  const { username } = res.locals;
 
   const query = `
     SELECT * FROM user_pinned_notes upn
@@ -79,7 +78,7 @@ notesController.getPinnedNotes = async (req, res, next) => {
   `;
 
   try {
-    const dbResponse = await db.query(query, [userName]);
+    const dbResponse = await db.query(query, [username]);
     res.locals.pinnedNotes = dbResponse.rows;
     return next();
   } catch (error) {
@@ -92,14 +91,14 @@ notesController.getPinnedNotes = async (req, res, next) => {
 
 notesController.getOwnedNotes = async (req, res, next) => {
   // get with params.username
-  let userName;
+  const { username } = res.locals;
 
   const query = `
     SELECT * FROM notes WHERE owner_id=(SELECT _id FROM users WHERE username=$1);
   `;
 
   try {
-    const dbResponse = await db.query(query, [userName]);
+    const dbResponse = await db.query(query, [username]);
     res.locals.pinnedNotes = dbResponse.rows;
     return next();
   } catch (error) {
@@ -114,7 +113,7 @@ notesController.updateNote = async (req, res, next) => {
   //update with params.noteId
   const { noteBody } = req.body;
   const { noteId } = req.params
-  let userName;
+  const { username } = res.locals;
 
   const query = `
   UPDATE notes 
@@ -124,7 +123,7 @@ notesController.updateNote = async (req, res, next) => {
   `;
 
   try {
-    const dbResponse = await db.query(query, [noteBody, noteId, userName]);
+    const dbResponse = await db.query(query, [noteBody, noteId, username]);
     return next();
   } catch (error) {
     return next({
@@ -136,7 +135,7 @@ notesController.updateNote = async (req, res, next) => {
 
 notesController.pinNote = async (req, res, next) => {
   // get with params.username
-  let userName;
+  const { username } = res.locals;
   const { noteId } = req.params;
 
   const query = `
@@ -158,7 +157,7 @@ notesController.pinNote = async (req, res, next) => {
 
 notesController.unpinNote = async (req, res, next) => {
   // get with params.username
-  let userName;
+  const { username } = res.locals;
   const { noteId } = req.params;
 
   const query = `

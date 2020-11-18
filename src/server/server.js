@@ -10,6 +10,12 @@ const resourcesRouter = require('./routes/resources.js');
 const tagsRouter = require('./routes/tags.js');
 const usersRouter = require('./routes/users.js');
 
+////////////////////////////
+//// DUMMY USER INFO
+const userController = require('./controllers/userController')
+app.use(userController.dummyUser);
+//////////////////////////
+
 
 // TO DO: make sure this file structure is correct
 // static file serving if in production
@@ -19,6 +25,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../index.html'));
   });
 }
+
 
 /** 
  * Define route handlers

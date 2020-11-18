@@ -3,13 +3,13 @@ const db = require('../models/dragoNotesModel');
 const tagsController = {};
 
 tagsController.getTags = (req, res, next) => {
-  // Get with req.params.tagId
 
   const query = `SELECT name FROM tags;`
 
   db.query(query)
     .then((response) => {
       res.locals.tags = response.rows;
+      next();
     })
     .catch((error) => next({
       error,
@@ -18,8 +18,7 @@ tagsController.getTags = (req, res, next) => {
 }
 
 tagsController.getPinnedTags = (req, res, next) => {
-  // grab with req.query.userId
-  const { username } = req.params;
+  const { username } = res.locals;
 
   const query = `SELECT name FROM user_pinned_tags upt
     INNER JOIN users u ON upt.user_id = u._id
@@ -29,6 +28,7 @@ tagsController.getPinnedTags = (req, res, next) => {
   db.query(query, [username])
     .then((response) => {
       res.locals.pinnedTags = response.rows;
+      next();
     })
     .catch((error) => next({
       error,
@@ -92,7 +92,7 @@ tagsController.removeTagFromResource = (req, res, next) => {
 };
 
 tagsController.pinTag = (req, res, next) => {
-  let username;
+  const { username } = res.locals;
   const { tag } = req.params;
 
   const query = `
@@ -113,20 +113,20 @@ tagsController.pinTag = (req, res, next) => {
 };
 
 tagsController.unpinTag = (req, res, next) => {
-  let username;
+  const { username } = res.locals;
   const { tag } = req.params;
 
   const query = `
     DELETE FROM user_pinned_tags
       WHERE user_id = (SELECT _id FROM users WHERE username = $1)
-      AND tag_id = (SELECT _id FROM tags WHERE name=$2);
+      AND tags_id = (SELECT _id FROM tags WHERE name=$2);
   `;
 
   db.query(query, [username, tag])
     .then(() => next())
     .catch((error) => next({
       error,
-      log: `Error in tagsController pinTag`,
+      log: `Error in tagsController unpinTag`,
     }));
 };
 

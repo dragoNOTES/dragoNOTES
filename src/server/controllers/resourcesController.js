@@ -4,7 +4,8 @@ const resourcesController = {};
 
 resourcesController.addResources = (req, res, next) => {
   // Update with req.body.link,  req.body.title, req.body.ownerId
-  const { link, title, username } = req.body;
+  const { link, title } = req.body;
+  const { username } = res.locals;
 
   const query = `
     INSERT INTO resources (link, title, owner_id)
@@ -28,7 +29,7 @@ resourcesController.getResource = (req, res, next) => {
 
   const query = `SELECT * FROM resources WHERE _id=$1`
 
-  try db.query(query, [resourceId])
+  db.query(query, [resourceId])
     .then((response) => {
       res.locals.resource = response.rows[0];
       return next()
@@ -71,7 +72,7 @@ resourcesController.getPageResources = (req, res, next) => {
 
 resourcesController.getPinnedResources = (req, res, next) => {
   // retrieve with req.params.resourceId
-  const { username } = req.params;
+  const { username } = res.locals;
 
   const query = `
     SELECT * FROM user_pinned_resources upr
@@ -97,7 +98,7 @@ resourcesController.getPinnedResources = (req, res, next) => {
 
 resourcesController.getOwnedResources = (req, res, next) => {
   // retrieve with req.params.username
-  const { username } = req.params;
+  const { username } = res.locals;
 
   const query = `
     SELECT * FROM resources 
@@ -117,7 +118,7 @@ resourcesController.getOwnedResources = (req, res, next) => {
 
 resourcesController.pinResource = (req, res, next) => {
   // retrieve with req.params.username
-  let username;
+  const { username } = res.locals;
   const { resourceId } = req.params;
 
   const query = `
@@ -135,7 +136,7 @@ resourcesController.pinResource = (req, res, next) => {
 }
 
 resourcesController.unpinResource = (req, res, next) => {
-  let username;
+  const { username } = res.locals;
   const { resourceId } = req.params;
 
   const query = `
