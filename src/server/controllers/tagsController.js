@@ -21,10 +21,12 @@ tagsController.getPinnedTags = (req, res, next) => {
   // grab with req.query.userId
   const { username } = req.params;
 
-  const query = `SELECT name FROM user_pinned_tags upt
+  const query = `
+    SELECT name FROM user_pinned_tags upt
     INNER JOIN users u ON upt.user_id = u._id
     INNER JOIN tags t ON upt.tags_id = t._id
-    WHERE u.username = $1;`
+    WHERE u.username = $1;
+  `
 
   db.query(query, [username])
     .then((response) => {
@@ -40,9 +42,11 @@ tagsController.addNewTag = (req, res, next) => {
   // Create with req.body.tag 
   const { tag } = req.body
 
-  const query = `INSERT INTO tags (name) 
+  const query = `
+    INSERT INTO tags (name) 
     VALUES ($1)
-    ON CONFLICT DO NOTHING;`
+    ON CONFLICT DO NOTHING;
+  `
 
   db.query(query, [tag])
     .then(() => next())
@@ -59,8 +63,10 @@ tagsController.addTagToResource = (req, res, next) => {
     return res.status(400).send('bad request, need tag and resourceId in body');
   }
 
-  const query = `INSERT INTO tagged_resources (resource_id, tags_id)
-    VALUES ($1, (SELECT _id FROM tags WHERE name=$2));`
+  const query = `
+    INSERT INTO tagged_resources (resource_id, tags_id)
+    VALUES ($1, (SELECT _id FROM tags WHERE name=$2));
+  `
 
   db.query(query, [resourceId, tag])
     .then(() => next())
@@ -79,9 +85,11 @@ tagsController.removeTagFromResource = (req, res, next) => {
     return res.status(400).send('bad requets, needs tag param and resourceId query param');
   }
 
-  const query = `DELETE FROM tagged_resources 
+  const query = `
+    DELETE FROM tagged_resources 
     WHERE tags_id = (SELECT _id FROM tags WHERE name = $1)
-    AND resource_id = $2;`
+    AND resource_id = $2;
+  `
   
   db.query(query, [tag, resourceId])
     .then(() => next())
