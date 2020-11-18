@@ -23,11 +23,14 @@ router.post('/',
     res.sendStatus(200);
   });
 
-router.delete('?tag=tagId&resource=resourceId',
+router.delete('/?tag=tagId&resource=resourceId',
   tagsController.removeTagFromResource,
   (req, res) => {
     res.sendStatus(200);
   });
+
+  module.exports = router;
+
 
 
 

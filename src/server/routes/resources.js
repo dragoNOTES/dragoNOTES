@@ -20,23 +20,27 @@ router.get('/:resourceId',
 router.get('/pinned/:resourceId', 
   resourcesController.getPinnedResources,
   (req, res) => {
-    res.send(200).json({pinnedResources: res.locals.pinnedResources}
-  })
-
-router.get('?tag=tagname', 
-  resourcesController.taggedResources,
-  (req, res) => {
-    res.send(200).json({taggesResources: res.locals.taggedResources}
+    res.send(200).json({pinnedResources: res.locals.pinnedResources})
   })
 
 router.get('/owned/:username', 
   resourcesController.getOwnedResources,
   (req, res) => {
-    res.send(200).json({ownedResources: res.locals.ownedResources}
+    res.send(200).json({ownedResources: res.locals.ownedResources})
   });
+
+  module.exports = router;
+
+
+  // router.get('/?tag=tagname', 
+  // resourcesController.taggedResources,
+  // (req, res) => {
+  //   res.send(200).json({taggesResources: res.locals.taggedResources})
+  // })
 
   // router.put('/:resourceId', 
   // resourcesController.updateResource,
   // (req, res) => {
   
   // });
+
