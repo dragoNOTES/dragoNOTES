@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start-auth": "nodemon ./src/server/auth-server.js",
     "start": "nodemon ./src/server/server.js && wait-on tcp:3000 && snowpack dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dragoNOTES/dragoNOTES.git"
@@ -35,8 +37,12 @@
     "@emotion/styled": "^11.0.0",
     "@reduxjs/toolkit": "^1.4.0",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "framer-motion": "^2.9.4",
+    "node-fetch": "^2.6.1",
     "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
