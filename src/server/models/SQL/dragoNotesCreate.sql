@@ -12,8 +12,9 @@ SET row_security = off;
 CREATE TABLE public.users (
 	"_id" serial NOT NULL,
 	"username" varchar NOT NULL,
-	"first_name" varchar,
-	"last_name" varchar,
+	"name" varchar,
+	"github_id" bigint,
+  "avatar" varchar,
   UNIQUE ("username"),
 	CONSTRAINT "users_pk" PRIMARY KEY ("_id")
 ) WITH (

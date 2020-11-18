@@ -14,10 +14,11 @@ sessionController.setJWT = (req, res, next) => {
     expires: new Date(Date.now() + (EXPIRATION_TIME_IN_SECS + 60) * 1000),
   };
 
-  const { username, id } = res.locals.userDoc;
+  const { username, userId, name } = res.locals;
   const payload = {
-    sub: id,
-    username: username,
+    sub: userId,
+    username,
+    name,
   }
 
   jwt.sign(payload, SECRET, jwtOptions, (err, token) => {
@@ -38,11 +39,8 @@ sessionController.validateSession = (req, res, next) => {
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) return redirect();
 
-    const { sub, username } = decoded;
-    res.locals.user = {
-      username,
-      id: sub,
-    };
+    const { username } = decoded;
+    res.locals.username = username;
     return next();
   });
 };
@@ -53,7 +51,7 @@ sessionController.logOut = (req, res, next) => {
     expires: new Date(Date.now() + 3 * 1000),
   };
 
-  res.cookie('jwt', 'sjhdfkj', cookieOptions);
+  res.cookie('jwt', '', cookieOptions);
   return next();
 }
 

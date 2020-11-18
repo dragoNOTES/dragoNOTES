@@ -56,7 +56,7 @@ authController.githubCallback = async (req, res, next) => {
     return next();
   } else {
     console.log('Error in authController.githubCallback');
-    res.redirect('/login');
+    return res.redirect('/login');
   }
 };
 

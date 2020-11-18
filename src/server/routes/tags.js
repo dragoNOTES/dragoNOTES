@@ -31,7 +31,7 @@ router.delete('/pinned/:tag',
 
 router.post('/',
   tagsController.addNewTag,
-  tagsControllr.addTagToResource,
+  tagsController.addTagToResource,
   (req, res) => {
     res.sendStatus(200);
   });

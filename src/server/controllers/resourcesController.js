@@ -28,7 +28,7 @@ resourcesController.getResource = (req, res, next) => {
 
   const query = `SELECT * FROM resources WHERE _id=$1`
 
-  try db.query(query, [resourceId])
+  db.query(query, [resourceId])
     .then((response) => {
       res.locals.resource = response.rows[0];
       return next()

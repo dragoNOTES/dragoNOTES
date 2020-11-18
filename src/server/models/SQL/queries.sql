@@ -4,8 +4,8 @@
 
 
 -- insert user
-INSERT INTO users (username, first_name, last_name) 
-  VALUES ($1, $2, $3)
+INSERT INTO users (username, name, github_id, avatar) 
+  VALUES ($1, $2, $3, $4)
   ON CONFLICT DO NOTHING;
 
 --  get user
