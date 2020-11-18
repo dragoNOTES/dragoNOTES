@@ -6,10 +6,6 @@
 
 const usersController = {};
 
-usersController.dummyUser = (req, res, next) => {
-  res.locals.username = 'bobsmith';
-  return next();
-}
 
 usersController.addUser = (req, res, next) => {
 
