@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+
 const apiRouter = require('./routes/api.js');
 const notesRouter = require('./routes/notes.js');
 const resourcesRouter = require('./routes/resources.js');
@@ -44,7 +45,7 @@ app.use((err, req, res, next) => {
     ...err,
   };
 
-  console.log(errObj.log);
+  console.log(errObj.log, errObj.error);
   return res.status(errObj.status).json(errObj.message);
 });
 
