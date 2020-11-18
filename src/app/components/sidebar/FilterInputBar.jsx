@@ -1,5 +1,24 @@
 import React from 'react';
 
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react"
+import { SearchIcon } from "@chakra-ui/icons"
+
 export default function FilterInputBar() {
-  return <div>FilterInputBar</div>;
+  return (
+    <InputGroup
+      w="80%"
+      m={5}
+      size="sm"
+      >
+    <InputLeftElement
+      pointerEvents="none"
+      color="gray.300"
+      children={<SearchIcon />}
+    />
+       <Input 
+      variant="filled" 
+      placeholder="Search" 
+    />
+   </InputGroup>
+  );
 }
