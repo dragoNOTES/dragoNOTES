@@ -17,7 +17,7 @@ router.get('/:noteId',
     res.sendStatus(200)
   })
 
-router.get('?resource=resouceId', 
+router.get('/?resource=resouceId', 
   notesController.getResourceNotes,
   (req, res) => {
     res.status(200).json({resourceNotes: resourceNotes})
@@ -40,3 +40,5 @@ router.put('/:noteId',
   (req, res) => {
     res.sendStatus(200);
   })
+
+  module.exports = router;

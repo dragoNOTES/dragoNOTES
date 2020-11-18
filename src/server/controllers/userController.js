@@ -1,21 +1,17 @@
-import { query } from '../models/dragoNotesModel';
-
 /** 
  * TODOs
  * 
  * - Add user authentication/authoriztion
  */
 
-
-
 const usersController = {};
 
-resourcesController.addUser = (req, res, next) => {
+usersController.addUser = (req, res, next) => {
 
 }
 
-resourcesController.getOwnedResources = (req, res, next) => {
+usersController.getOwnedResources = (req, res, next) => {
 
 }
 
-modules.exports = usersController; 
+module.exports = usersController; 

@@ -1,4 +1,4 @@
-import { query } from '../models/dragoNotesModel';
+const db = require('../models/dragoNotesModel');
 
 const resourcesController = {};
 
@@ -30,4 +30,4 @@ resourcesController.getOwnedResources = (req, res, next) => {
 //   // update with req.params.resourceId
 // }
 
-modules.exports = resourcesController; 
+module.exports = resourcesController; 

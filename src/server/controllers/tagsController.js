@@ -1,7 +1,6 @@
-import { query } from '../models/dragoNotesModel';
+const db = require('../models/dragoNotesModel');
 
 const tagsController = {};
-
 
 tagsController.getTags = (req, res, next) => {
   // Get with req.params.tagId
@@ -25,4 +24,4 @@ tagsController.removeTagFromResource = (req, res, next) => {
 }
 
 
-modules.exports = tagsController; 
+module.exports = tagsController; 

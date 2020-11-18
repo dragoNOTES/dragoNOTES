@@ -1,4 +1,4 @@
-import { query } from '../models/dragoNotesModel';
+const db = require('../models/dragoNotesModel');
 
 const notesController = {}
 
