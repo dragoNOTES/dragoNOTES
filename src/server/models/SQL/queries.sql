@@ -1,7 +1,6 @@
 --TO DO: 
 --  update a note with time updated too
---  update numNotes and numPinned on resources when updated
---  delete a resource when it has no notes
+--  able to delete a resource when it has no notes
 
 
 -- insert user
@@ -57,6 +56,12 @@ DELETE FROM tags t
 INSERT INTO notes (content, owner_id, resource_id)
   VALUES ($1, $2, $3);
 
+-- update a note
+UPDATE notes 
+  SET content = $1
+  WHERE _id = $2 
+  AND owner_id = (SELECT _id FROM users WHERE username = $3);
+
 -- delete a note
 DELETE FROM notes WHERE _id = $1;
 
@@ -85,7 +90,6 @@ DELETE FROM user_pinned_notes
   WHERE user_id = (SELECT _id FROM users WHERE username = $1)
   AND notes_id = $2;
 
-
 --------- RESOURCES
 
 -- add a resource
@@ -97,6 +101,9 @@ INSERT INTO resources (link, title, owner_id, num_notes, num_pinned)
 
 -- get a single resource
 SELECT * FROM resources WHERE _id=$1
+
+-- get all user's owned resources (DONE)
+SELECT * FROM resources WHERE owner_id = (SELECT _id FROM users WHERE username = $1);
 
 -- tag a resource
 INSERT INTO tagged_resources (resource_id, tags_id)

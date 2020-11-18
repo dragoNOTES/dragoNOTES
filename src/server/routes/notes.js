@@ -4,6 +4,18 @@ const router = express.Router();
 
 const notesController = require('../controllers/notesController');
 
+router.post('/pinned/:noteId', 
+  notesController.pinNote,
+  (req, res) => {
+    res.sendStatus(200);
+  });
+
+router.delete('/pinned/:noteId', 
+  notesController.unpinNote,
+  (req, res) => {
+    res.sendStatus(200);
+  });
+
 router.post('/', 
   notesController.addNote,
   (req, res) => {
