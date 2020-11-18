@@ -2,19 +2,18 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import AddResourceButton from './AddResourceButton';
 
-import { Flex, Text, Heading } from '@chakra-ui/react';
+import { Flex, Text, Spacer} from '@chakra-ui/react';
 
 export default function Toolbar() {
   return (
-    <Flex h="60px" align="center" bg="gray.900" >
-      <Flex w="400px" >
-        <Text fontSize="3xl"> 🐉 </Text>
-        <Heading as="h2" size="xl"> DragoNotes </Heading>
-      </Flex>
+    <Flex h="100px" alignItems="center" justifyContent="space-between" bg="gray.900" p={2}>
+      
       <Flex >
+        <Text fontSize="2xl" fontWeight="500" >🐉 DragoNotes </Text>
+      </Flex>
+
         <SearchBar/>
         <AddResourceButton/>
-      </Flex>
     </Flex>
   );
 }

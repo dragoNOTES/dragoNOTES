@@ -7,6 +7,7 @@ export default function SearchBar() {
   <Input 
     variant="filled" 
     placeholder="Search Topic" 
-    size="sm"
+    flex={1}
+    maxW="500px"
   />);
 }

@@ -8,28 +8,33 @@ import {
   MenuButton,
   MenuList,
   MenuItem, 
+  Spacer
 } from "@chakra-ui/react"
 
 export default function UserProfile() {
   return (
   <Flex 
-    h='60px' 
-    w='100%' 
+    h='60px'  
     direction='row' 
-    align='center'
+    // align='center'
+    alignItems="center"
+    m={5}
     >
-      <Flex >
         <Avatar 
           name="UserPicture" 
           src="" 
           size="lg"
+          boxShadow="lg"
+          mx={5}
         />
-      </Flex>
 
       <Menu>
       <MenuButton 
         as={Button} 
-        colorScheme="blue"
+        colorScheme="gray"
+        boxShadow="lg"
+        variant="ghost"
+        
       >
         Username
       </MenuButton>
@@ -37,6 +42,7 @@ export default function UserProfile() {
           <MenuItem>Sign out</MenuItem>
         </MenuList>
       </Menu>
+      
   </Flex>
 );
 }
