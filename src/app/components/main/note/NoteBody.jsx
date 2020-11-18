@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Container, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -16,8 +16,6 @@ const renderers = {
   },
 };
 
-// ! Bug: ReactMarkdown isn't rendering properly, and the code preview will only render
-// !      on a hot reload from Snowpack...
 export default memo(function NoteBody({ content }) {
   return (
     <Box p={6} maxW="100%">

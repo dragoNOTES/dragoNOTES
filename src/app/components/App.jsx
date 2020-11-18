@@ -11,7 +11,7 @@ export default function App() {
     <Flex h="100vh" maxH="100vh" direction="column">
       <Toolbar />
       <Flex flex="1" maxH="100%">
-        {/* <Sidebar /> */}
+        <Sidebar />
         <Main />
       </Flex>
     </Flex>
