@@ -4,10 +4,6 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f16c3220d716dba18e8dc38d115ab06a36af1b72
 const apiRouter = require('./routes/api.js');
 const notesRouter = require('./routes/notes.js');
 const resourcesRouter = require('./routes/resources.js');
