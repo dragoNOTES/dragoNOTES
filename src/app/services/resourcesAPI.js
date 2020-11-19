@@ -1,7 +1,7 @@
 export default {
   async create({ title, url, tags }) {
     //MJ: currently not using tags no backend funcitonality
-    return fetch('/api/resources', {
+    const res = await fetch('/api/resources', {
       method: 'POST',
       body: JSON.stringify({
         title,
@@ -11,37 +11,21 @@ export default {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.resources;
-      });
+    });
+    const data = await res.json();  
+    return data.resources;
   },
 
   async fetchByID(id) {
-    return fetch(`/api/resources/${id}`, {
-      method: 'GET',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.resource;
-      });
+    const res = await fetch(`/api/resources/${id}`);
+    const data = await res.json();  
+    return data.resource;
   },
 
   async fetchPinned() {
-    return fetch('/api/resources/pinned', {
-      method: 'GET',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.pinnedResources;
-      });
+    const res = await fetch('/api/resources/pinned');
+    const data = await res.json();
+    return data.pinnedResources;
   },
 
   async fetchByTags(tagName, page = 0) {

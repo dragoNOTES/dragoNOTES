@@ -1,16 +1,10 @@
 export default {
   async fetchAll() {
     // TODO: fill with actual fetch request from api MJ -> Is this correct?
-    return fetch('/api/tags', {
-      method: 'GET',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.tags;
-      });
-  },
+    let res = await fetch('/api/tags');
+    res = await res.json();
+    return res;
+  }
 
   async create({ name }) {
     // TODO: fill with actual fetch request from api
