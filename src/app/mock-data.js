@@ -11,7 +11,8 @@ export const otherResources = generate(10, () => ({
 }));
 
 export const notes = generate(2, () => ({
-  updatedAt: Date.now(),
+  created_at: Date.now(),
+  owner_id: 43243243,
   content: `
 ## Async Actions
 - *They are pretty nice!*

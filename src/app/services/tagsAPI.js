@@ -1,5 +1,3 @@
-import { response } from 'express';
-import { wait, createTag } from '../utils';
 
 export default {
   async fetchAll() {

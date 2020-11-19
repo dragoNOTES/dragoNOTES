@@ -12,7 +12,7 @@ export const createResource = createAsyncThunk(
 export const fetchResourcesByTags = createAsyncThunk(
   'resources/fetchByTags',
   async (tags) => {
-    const resources = await resourcesAPI.fetchByTags(...tags);
+    const resources = await resourcesAPI.fetchByTags(tags);
     return resources;
   }
 );
@@ -41,8 +41,8 @@ const resourceSlice = createSlice({
   name: 'resources',
   initialState: {
     loading: false,
-    // will contain the resources from the last query by tags
-    resources: [],
+    // will contain the resources from the fetchResourcesByTags call
+    resourcesByTag: [],
     // pinned resources
     pinned: [],
   },
@@ -52,15 +52,15 @@ const resourceSlice = createSlice({
     [fetchResourcesByTags.pending]: setLoading,
     [pinResourceByID.pending]: setLoading,
     [fetchPinnedResources.pending]: setLoading,
-    [createResource.fulfilled]: (state, action) => {
+    [createResource.fulfilled]: (state, { payload: resource }) => {
       state.loading = false;
 
-      state.resources.push(action.payload);
+      state.resourcesByTag.push(resource);
     },
-    [fetchResourcesByTags.fulfilled]: (state, action) => {
+    [fetchResourcesByTags.fulfilled]: (state, { payload: resources }) => {
       state.loading = false;
 
-      state.resources = action.payload;
+      state.resourcesByTag = resources;
     },
     [pinResourceByID.fulfilled]: (state, { payload }) => {
       state.loading = false;
@@ -72,22 +72,22 @@ const resourceSlice = createSlice({
 
       if (alreadyPinnedIndex > -1) {
         // if the resource is already pinned, unpin it
-        state.resources.splice(alreadyPinnedIndex, 1);
+        state.resourcesByTag.splice(alreadyPinnedIndex, 1);
       } else {
         // if it's not pinned, pin it
-        state.resources.push(resource);
+        state.resourcesByTag.push(resource);
       }
     },
     [fetchPinnedResources.fulfilled]: (state, { payload }) => {
       state.loading = false;
 
-      state.resources = payload;
+      state.resourcesByTag = payload;
     },
   },
 });
 
-const { /* actions, */ reducer } = resourceSlice;
+const { actions, reducer } = resourceSlice;
 
-// export const {} = actions;
+export const { setTagQuery } = actions;
 
 export default reducer;

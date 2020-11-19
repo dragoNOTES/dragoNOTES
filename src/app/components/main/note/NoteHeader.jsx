@@ -10,10 +10,10 @@ export default function NoteHeader({ note }) {
       <Avatar />
       <VStack ml={4} spacing={0} align="flex-start">
         <Text fontWeight="400" fontSize="md">
-          Jonathan
+          {note.owner_id}
         </Text>
         <Text color="gray.500">
-          Last updated {new Date(note.updatedAt).toLocaleDateString()}
+          Created at {new Date(note.created_at).toLocaleDateString()}
         </Text>
       </VStack>
       <Spacer />

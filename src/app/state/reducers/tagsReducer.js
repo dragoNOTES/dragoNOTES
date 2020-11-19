@@ -31,15 +31,20 @@ const tagsSlice = createSlice({
   initialState: {
     loading: false,
     tags: [],
+    lastQuery: '',
     filteredTags: [],
   },
   // NOTE: Functions in here are automatically converted to action creators, which can be passed to `dispatch()`
   reducers: {
     filterTags(state, { payload: searchQuery }) {
-      const filterFunction = (tag) =>
-        tag.name.toLowerCase().indexOf(searchQuery.toLowerCase());
+      // TODO: leaving this here for future autocomplete functionality in the ui
+      // const filterFunction = (tag) =>
+      //   tag.name.toLowerCase().indexOf(searchQuery.toLowerCase());
 
-      state.filteredTags = state.tags.filter(filterFunction);
+      state.lastQuery = searchQuery;
+      state.filteredTags = state.tags.filter(
+        (tag) => tag.name.toLowerCase() === searchQuery
+      );
     },
   },
   // NOTE: Functions in here will NOT be automatically converted to action creators
