@@ -4,7 +4,7 @@ export default {
     let res = await fetch('/api/tags');
     res = await res.json();
     return res;
-  }
+  },
 
   async create({ name }) {
     // TODO: fill with actual fetch request from api
