@@ -13,7 +13,7 @@ import {
 export default function UserProfile() {
   return (
     <Flex h="60px" direction="row" alignItems="center" m={5}>
-      <Avatar name="UserPicture" src="" size="md" boxShadow="lg" mx={5} />
+      <Avatar name="UserPicture" src="" size="md" boxShadow="lg" mx={4} />
       <Menu>
         <MenuButton as={Button} colorScheme="gray" variant="ghost">
           Username
