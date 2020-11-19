@@ -1,4 +1,3 @@
-import { wait, createNote } from '../utils';
 
 export default {
   async fetchData() {

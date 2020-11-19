@@ -1,5 +1,3 @@
-import { connect } from '../../server/routes/api';
-import { wait, createNote } from '../utils';
 
 export default {
   async fetchByResource(id) {

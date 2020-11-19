@@ -6,7 +6,7 @@ export default {
       method: 'POST', 
       body: JSON.stringify({ 
         title,
-        link: url
+        link: url,
         tags,
       }),
       headers: {
