@@ -26,7 +26,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     loading: false,
-    isLoggedIn: true,
+    isLoggedIn: false,
     avatarUrl: '',
     username: '',
     name: '',
