@@ -12,7 +12,7 @@ export const createResource = createAsyncThunk(
 export const fetchResourcesByTags = createAsyncThunk(
   'resources/fetchByTags',
   async (tags) => {
-    const resources = await resourcesAPI.fetchByTags(tags);
+    const resources = await resourcesAPI.fetchByTags(tags[0].name);
     return resources;
   }
 );

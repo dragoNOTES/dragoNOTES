@@ -1,37 +1,38 @@
-
 export default {
   async fetchAll() {
     // TODO: fill with actual fetch request from api MJ -> Is this correct?
-    fetch('/api/tags', {
-      method: 'GET', 
+    return fetch('/api/tags', {
+      method: 'GET',
     })
-      .then((response) => { return response.json() })
-      .then(data => {
-        return data.tags 
+      .then((response) => {
+        return response.json();
       })
+      .then((data) => {
+        return data.tags;
+      });
   },
 
   async create({ name }) {
     // TODO: fill with actual fetch request from api
-    fetch('/api/tags', {
-      method: 'POST', 
-      body: JSON.stringify({ 
+    return fetch('/api/tags', {
+      method: 'POST',
+      body: JSON.stringify({
         tag: name,
       }),
       headers: {
         'Content-Type': 'application/json',
-      }
-    })
+      },
+    });
   },
 
   async pinByID(id) {
     // TODO: add a tag to the currently logged in user's pinned tags by it's id
-    fetch(`/api/tags/${id}`, {
-      method: 'POST', 
+    return fetch(`/api/tags/${id}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
-    })
+      },
+    });
     // await wait(500);
     // return createTag({ name, _id: id });
   },
