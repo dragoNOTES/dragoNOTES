@@ -1,14 +1,8 @@
 export default {
   async fetchByResource(id) {
-    return fetch(`/api/notes?resourceId=${id}`, {
-      method: 'GET',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.resourceNotes;
-      });
+    const res = await fetch(`/api/notes?resourceId=${id}`);
+    const data = await res.json();
+    return data.resourceNotes;
   },
   async create({ resourceID, content }) {
     return fetch('/api/notes', {
@@ -29,15 +23,9 @@ export default {
       });
   },
   async fetchByID(id) {
-    return fetch(`/api/notes/${id}`, {
-      method: 'GET',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data.note;
-      });
+    const res = await fetch(`/api/notes/${id}`);
+    const data = await res.json();
+    return data.note;
   },
 
   async pinByID(id) {
