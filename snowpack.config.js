@@ -15,5 +15,8 @@ module.exports = {
     polyfillNode: true,
   },
   install: ['@chakra-ui/react', '@chakra-ui/icons', 'styled-components'],
-  // TODO: complete the proxy setup and mount correctly
+  proxy: {
+    '/api': 'http://localhost:3000/api',
+    '/auth': 'http://localhost:3000/auth',
+  },
 };

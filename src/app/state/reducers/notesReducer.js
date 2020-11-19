@@ -4,16 +4,16 @@ import notesAPI from '../../services/notesAPI';
 export const createNote = createAsyncThunk(
   'notes/create',
   async ({ content, resourceID }) => {
-    const response = await notesAPI.create({ content, resourceID });
-    return response;
+    const note = await notesAPI.create({ content, resourceID });
+    return note;
   }
 );
 
 export const fetchNotesByResourceID = createAsyncThunk(
   'notes/fetchByResourceID',
   async (resourceID) => {
-    const response = await notesAPI.fetchByResource(resourceID);
-    return response;
+    const notes = await notesAPI.fetchByResource(resourceID);
+    return notes;
   }
 );
 

@@ -5,8 +5,14 @@ dependencies:
   '@emotion/react': 11.0.0_react@17.0.1
   '@emotion/styled': 11.0.0_53ddc24751dc7591bad16d6155c1e564
   '@reduxjs/toolkit': 1.4.0
+  cookie-parser: 1.4.5
+  cors: 2.8.5
+  dotenv: 8.2.0
+  esm: 3.2.25
   express: 4.17.1
   framer-motion: 2.9.4_react-dom@17.0.1+react@17.0.1
+  jsonwebtoken: 8.5.1
+  node-fetch: 2.6.1
   pg: 8.5.1
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
@@ -1675,6 +1681,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
+  /buffer-equal-constant-time/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-+OcRMvf/5uAaXJaXpMbz5I1cyBk=
   /buffer-writer/2.0.0:
     dev: false
     engines:
@@ -1951,6 +1961,15 @@ packages:
       safe-buffer: 5.1.2
     resolution:
       integrity: sha512-4FJkXzKXEDB1snCFZlLP4gpC3JILicCpGbzG9f9G7tGqGCzETQ2hWPrcinA9oU4wtf2biUaEH5065UnMeR33oA==
+  /cookie-parser/1.4.5:
+    dependencies:
+      cookie: 0.4.0
+      cookie-signature: 1.0.6
+    dev: false
+    engines:
+      node: '>= 0.8.0'
+    resolution:
+      integrity: sha512-f13bPUj/gG/5mDr+xLmSxxDsB9DQiTIfhJS/sqjrmfAWiAN+x2O4i/XguTL9yDZ+/IFDanJ+5x7hC4CXT9Tdzw==
   /cookie-signature/1.0.6:
     dev: false
     resolution:
@@ -1967,6 +1986,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-i13qo6kIHTTpCm8/Wup+0b1mVWETvu2kIMzKoK8FpkLkFxlt0znUAHcMzox+T8sPlqtZXq3CulEjQHsYiGFJUw==
+  /cors/2.8.5:
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
+    dev: false
+    engines:
+      node: '>= 0.10'
+    resolution:
+      integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
   /cosmiconfig/6.0.0:
     dependencies:
       '@types/parse-json': 4.0.0
@@ -2254,7 +2282,6 @@ packages:
     resolution:
       integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
   /dotenv/8.2.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -2263,6 +2290,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
+  /ecdsa-sig-formatter/1.0.11:
+    dependencies:
+      safe-buffer: 5.2.1
+    dev: false
+    resolution:
+      integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
   /ee-first/1.1.1:
     dev: false
     resolution:
@@ -2525,6 +2558,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-uCORMuOO8tUzJmsdRtrvcGq5qposf7Rw0LwkTJkoDbOycVQtQjmnhZSuLQnozLE4TmAzlMVV45eCHmQ1OpDKUQ==
+  /esm/3.2.25:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
   /espree/7.3.0:
     dependencies:
       acorn: 7.4.1
@@ -3487,6 +3526,24 @@ packages:
     dev: true
     resolution:
       integrity: sha512-XNZHs3N1IOa3lPKm//npxMhOdaoPw+MvEV0NIgxcER83GTJcG13rehtWmpBCfEt8DrtYwIkMTs8bdXoYs4fvnQ==
+  /jsonwebtoken/8.5.1:
+    dependencies:
+      jws: 3.2.2
+      lodash.includes: 4.3.0
+      lodash.isboolean: 3.0.3
+      lodash.isinteger: 4.0.4
+      lodash.isnumber: 3.0.3
+      lodash.isplainobject: 4.0.6
+      lodash.isstring: 4.0.1
+      lodash.once: 4.1.1
+      ms: 2.1.2
+      semver: 5.7.1
+    dev: false
+    engines:
+      node: '>=4'
+      npm: '>=1.4.28'
+    resolution:
+      integrity: sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==
   /jsx-ast-utils/3.1.0:
     dependencies:
       array-includes: 3.1.1
@@ -3496,6 +3553,21 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-d4/UOjg+mxAWxCiF0c5UTSwyqbchkbqCvK87aBovhnh8GtysTjWmgC63tY0cJx/HzGgm9qnA147jVBdpOiQ2RA==
+  /jwa/1.4.1:
+    dependencies:
+      buffer-equal-constant-time: 1.0.1
+      ecdsa-sig-formatter: 1.0.11
+      safe-buffer: 5.2.1
+    dev: false
+    resolution:
+      integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==
+  /jws/3.2.2:
+    dependencies:
+      jwa: 1.4.1
+      safe-buffer: 5.2.1
+    dev: false
+    resolution:
+      integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==
   /keyv/3.1.0:
     dependencies:
       json-buffer: 3.0.0
@@ -3559,10 +3631,38 @@ packages:
     dev: false
     resolution:
       integrity: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
+  /lodash.includes/4.3.0:
+    dev: false
+    resolution:
+      integrity: sha1-YLuYqHy5I8aMoeUTJUgzFISfVT8=
+  /lodash.isboolean/3.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY=
+  /lodash.isinteger/4.0.4:
+    dev: false
+    resolution:
+      integrity: sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=
+  /lodash.isnumber/3.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-POdoEMWSjQM1IwGsKHMX8RwLH/w=
+  /lodash.isplainobject/4.0.6:
+    dev: false
+    resolution:
+      integrity: sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
+  /lodash.isstring/4.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
   /lodash.mergewith/4.6.2:
     dev: false
     resolution:
       integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==
+  /lodash.once/4.1.1:
+    dev: false
+    resolution:
+      integrity: sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
   /lodash/4.17.20:
     resolution:
       integrity: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -3883,6 +3983,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+  /node-fetch/2.6.1:
+    dev: false
+    engines:
+      node: 4.x || >=6.0.0
+    resolution:
+      integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
   /nodemon/2.0.6:
     dependencies:
       chokidar: 3.4.3
@@ -4899,7 +5005,6 @@ packages:
     resolution:
       integrity: sha512-GX0Ix/CJcHyB8c4ykpHGIAvLyOwOobtM/8d+TQkAd81/bEjgPHrfba41Vpesr7jX/t8Uh+R3EX9eAS5be+jQYg==
   /semver/5.7.1:
-    dev: true
     hasBin: true
     resolution:
       integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
@@ -5769,13 +5874,19 @@ specifiers:
   '@reduxjs/toolkit': ^1.4.0
   '@snowpack/plugin-dotenv': ^2.0.4
   '@snowpack/plugin-react-refresh': ^2.3.7
+  cookie-parser: ^1.4.5
+  cors: ^2.8.5
+  dotenv: ^8.2.0
   eslint: ^7.13.0
   eslint-config-prettier: ^6.15.0
   eslint-config-problems: ^5.0.0
   eslint-plugin-react: ^7.21.5
   eslint-plugin-react-hooks: ^4.2.0
+  esm: ^3.2.25
   express: ^4.17.1
   framer-motion: ^2.9.4
+  jsonwebtoken: ^8.5.1
+  node-fetch: ^2.6.1
   nodemon: ^2.0.6
   npm-run-all: ^4.1.5
   pg: ^8.5.1

@@ -50,9 +50,9 @@ const tagsSlice = createSlice({
       state.tags = action.payload;
     },
     [createTag.pending]: setLoading,
-    [createTag.fulfilled]: (state, action) => {
+    [createTag.fulfilled]: (state, { payload: tag }) => {
       state.loading = false;
-      state.tags.push(action.payload);
+      state.tags.push(tag);
     },
   },
 });
