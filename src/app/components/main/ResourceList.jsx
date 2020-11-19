@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 
 import Resource from './resource/Resource';
 
-export default function ResourceList({ title, filter = () => true, ...props }) {
-  const resources = useSelector((state) => state.resources.resourcesByTag);
+export default function ResourceList({ title, filter, ...props }) {
+  const resources = useSelector(
+    (state) => state.resources.resourcesByTag || []
+  );
 
   return (
     <Container maxW="lg">
@@ -15,7 +17,7 @@ export default function ResourceList({ title, filter = () => true, ...props }) {
           {title}
         </Heading>
         <VStack flex="1" spacing={5}>
-          {resources.filter(filter).map((resource) => (
+          {resources.filter(filter || (() => true)).map((resource) => (
             <Resource key={resource._id} {...{ resource }} />
           ))}
         </VStack>
