@@ -3,8 +3,9 @@ import resourcesAPI from '../../services/resourcesAPI';
 
 export const createResource = createAsyncThunk(
   'resources/create',
-  async ({ name }) => {
-    const resource = await resourcesAPI.create({ name });
+  async ({ title, link }) => {
+    const resource = await resourcesAPI.create({ title, link });
+    console.dir(resource);
     return resource;
   }
 );
@@ -54,6 +55,9 @@ const resourceSlice = createSlice({
     [fetchPinnedResources.pending]: setLoading,
     [createResource.fulfilled]: (state, { payload: resource }) => {
       state.loading = false;
+
+      // ! Patching this in here for the demo because creating a resource doesn't support adding tags to the resource
+      resource.tags = [{ name: 'react' }];
 
       state.resourcesByTag.push(resource);
     },

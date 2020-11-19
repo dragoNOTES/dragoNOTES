@@ -1,13 +1,11 @@
 export default {
   async fetchAll() {
-    // TODO: fill with actual fetch request from api MJ -> Is this correct?
     let res = await fetch('/api/tags');
     res = await res.json();
     return res.tags || [];
   },
 
   async create({ name }) {
-    // TODO: fill with actual fetch request from api
     return fetch('/api/tags', {
       method: 'POST',
       body: JSON.stringify({
@@ -19,8 +17,17 @@ export default {
     });
   },
 
+  async addTagToResource(tagName, id) {
+    const response = await fetch(`/api/tags/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.json();
+  },
+
   async pinByID(id) {
-    // TODO: add a tag to the currently logged in user's pinned tags by it's id
     return fetch(`/api/tags/${id}`, {
       method: 'POST',
       headers: {
