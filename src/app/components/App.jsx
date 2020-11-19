@@ -9,12 +9,14 @@ import Sidebar from './sidebar/Sidebar';
 import Main from './main/Main';
 
 import { fetchAllTags } from '../state/reducers/tagsReducer';
+import { fetchUserData } from '../state/reducers/userReducer';
 
 export default function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   useEffect(() => {
+    dispatch(fetchUserData());
     dispatch(fetchAllTags());
   });
 
