@@ -18,7 +18,7 @@ export default function ResourceList({ title, filter, ...props }) {
         </Heading>
         <VStack flex="1" spacing={5}>
           {resources.filter(filter || (() => true)).map((resource) => (
-            <Resource key={resource._id} {...{ resource }} />
+            <Resource key={resource.id} {...{ resource }} />
           ))}
         </VStack>
       </Flex>

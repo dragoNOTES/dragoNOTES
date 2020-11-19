@@ -1,16 +1,15 @@
 const db = require('../models/dragoNotesModel');
 
-const notesController = {}
+const notesController = {};
 
 notesController.addNote = async (req, res, next) => {
-  
   const { resourceId, noteBody } = req.body;
   const { username } = res.locals;
 
   const query = `
     INSERT INTO notes (content, owner_id, resource_id)
       VALUES ($1, (SELECT _id FROM users WHERE username = $2), $3)
-      RETURNING _id;
+      RETURNING *;
   `;
 
   try {
@@ -25,11 +24,10 @@ notesController.addNote = async (req, res, next) => {
   }
 };
 
-
 notesController.getNote = async (req, res, next) => {
   // get with body.params.noteId
   const { noteId } = req.params;
-  
+
   const query = `
     SELECT * FROM notes WHERE _id = $1;
   `;
@@ -44,7 +42,7 @@ notesController.getNote = async (req, res, next) => {
       log: `Error in notesController.addNote db.query`,
     });
   }
-}
+};
 
 notesController.getResourceNotes = async (req, res, next) => {
   // get resourceId from query.params.resourceId
@@ -64,8 +62,7 @@ notesController.getResourceNotes = async (req, res, next) => {
       log: `Error in notesController.getResourceNotes db.query`,
     });
   }
-
-}
+};
 
 notesController.getPinnedNotes = async (req, res, next) => {
   // get with params.username
@@ -88,7 +85,7 @@ notesController.getPinnedNotes = async (req, res, next) => {
       log: `Error in notesController.getPinnedNotes db.query`,
     });
   }
-}
+};
 
 notesController.getOwnedNotes = async (req, res, next) => {
   // get with params.username
@@ -108,12 +105,12 @@ notesController.getOwnedNotes = async (req, res, next) => {
       log: `Error in notesController.getOwnedNotes db.query`,
     });
   }
-}
+};
 
 notesController.updateNote = async (req, res, next) => {
   //update with params.noteId
   const { noteBody } = req.body;
-  const { noteId } = req.params
+  const { noteId } = req.params;
   const { username } = res.locals;
 
   const query = `
@@ -132,7 +129,7 @@ notesController.updateNote = async (req, res, next) => {
       log: `Error in notesController.updateNote db.query`,
     });
   }
-}
+};
 
 notesController.pinNote = async (req, res, next) => {
   // get with params.username
@@ -154,7 +151,7 @@ notesController.pinNote = async (req, res, next) => {
       log: `Error in notesController.pinNote db.query`,
     });
   }
-}
+};
 
 notesController.unpinNote = async (req, res, next) => {
   // get with params.username
@@ -176,9 +173,6 @@ notesController.unpinNote = async (req, res, next) => {
       log: `Error in notesController.unpinNote db.query`,
     });
   }
-}
-
-
-
+};
 
 module.exports = notesController;

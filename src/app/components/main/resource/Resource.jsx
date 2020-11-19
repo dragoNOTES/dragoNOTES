@@ -15,7 +15,7 @@ export default function Resource({ resource }) {
 
   const _onToggle = () => {
     // fetch all the notes for a given resource when the resource is dropped down
-    if (!isOpen) dispatch(fetchNotesByResourceID(resource._id));
+    if (!isOpen) dispatch(fetchNotesByResourceID(resource.id));
     onToggle();
   };
 

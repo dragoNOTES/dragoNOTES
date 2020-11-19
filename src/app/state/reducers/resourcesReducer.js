@@ -67,7 +67,7 @@ const resourceSlice = createSlice({
 
       const { resource } = payload;
       const alreadyPinnedIndex = state.pinned.findIndex(
-        ({ _id }) => _id === resource._id
+        ({ _id }) => _id === resource.id
       );
 
       if (alreadyPinnedIndex > -1) {

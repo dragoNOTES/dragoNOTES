@@ -3,7 +3,7 @@ export default {
     // TODO: fill with actual fetch request from api MJ -> Is this correct?
     let res = await fetch('/api/tags');
     res = await res.json();
-    return res;
+    return res.tags || [];
   },
 
   async create({ name }) {
