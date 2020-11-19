@@ -1,10 +1,10 @@
-const path = require('path');
 const express = require('express');
 const path = require('path');
 
 const app = express();
 const PORT = 3000;
 
+const sessionController = require('./controllers/sessionController');
 const authRouter = require('./routes/auth');
 const apiRouter = require('./routes/api.js');
 const notesRouter = require('./routes/notes.js');
@@ -23,17 +23,15 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-/////////////////////
-/// DUMMY USERNAME FOR TESTS
-// app.use((req, res, next) => {
-//   res.locals.username = 'dummySam';
-//   return next();
-// })
-
 /** 
  * Define route handlers
  */
-app.use('/auth', authRouter);
+
+ app.use('/auth', authRouter);
+
+// auth validation check before all api routes
+app.use('/api', sessionController.validateSession);
+
 app.use('/api/notes', notesRouter);
 app.use('/api/resources', resourcesRouter);
 app.use('/api/tags', tagsRouter);
