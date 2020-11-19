@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "npm-run-all -p start:api wait-web",
     "start:api": "nodemon ./src/server/server.js",
     "start:web": "snowpack dev",
     "wait-web": "wait-on tcp:3000 && npm run start:web",
+    "start-server": "nodemon ./src/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -39,8 +41,13 @@
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@reduxjs/toolkit": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "framer-motion": "^2.9.4",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.1",
     "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

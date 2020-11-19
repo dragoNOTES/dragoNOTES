@@ -1,8 +1,18 @@
+const path = require('path');
 const express = require('express');
 const path = require('path');
 
 const app = express();
 const PORT = 3000;
+
+const authRouter = require('./routes/auth');
+const apiRouter = require('./routes/api.js');
+const notesRouter = require('./routes/notes.js');
+const resourcesRouter = require('./routes/resources.js');
+const tagsRouter = require('./routes/tags.js');
+const usersRouter = require('./routes/users.js');
+
+app.use(express.json());
 
 // TO DO: make sure this file structure is correct
 // static file serving if in production
@@ -12,6 +22,23 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../index.html'));
   });
 }
+
+/////////////////////
+/// DUMMY USERNAME FOR TESTS
+// app.use((req, res, next) => {
+//   res.locals.username = 'dummySam';
+//   return next();
+// })
+
+/** 
+ * Define route handlers
+ */
+app.use('/auth', authRouter);
+app.use('/api/notes', notesRouter);
+app.use('/api/resources', resourcesRouter);
+app.use('/api/tags', tagsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api', apiRouter);
 
 // catch-all route handler
 app.use('*', (req, res) => res.sendStatus(404));
@@ -31,7 +58,7 @@ app.use((err, req, res, next) => {
     ...err,
   };
 
-  console.log(errObj.log);
+  console.log(errObj.log, errObj.error);
   return res.status(errObj.status).json(errObj.message);
 });
 
