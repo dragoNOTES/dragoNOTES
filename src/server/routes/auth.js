@@ -12,7 +12,11 @@ router.get('/callback',
   sessionController.setJWT,
   userController.addUser,
   (req, res) => {
-    return res.redirect('/');
+
+    // hacky redirect to dev server
+    // should have dev and prod environment conditional
+    // prod would redirect to '/'
+    return res.redirect('http://localhost:8080');
   }
 );
 
