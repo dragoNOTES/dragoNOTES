@@ -29,6 +29,7 @@ CREATE TABLE  public.resources (
   "num_notes" int DEFAULT 0,
   "num_pinned" int DEFAULT 0,
   "owner_id" bigint NOT NULL,
+  UNIQUE ("link"),
 	CONSTRAINT "resources_pk" PRIMARY KEY ("_id"),
   CONSTRAINT "resources_fk0" FOREIGN KEY ("owner_id") REFERENCES public.users("_id")
 ) WITH (

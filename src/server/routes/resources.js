@@ -7,20 +7,8 @@ const resourcesController = require('../controllers/resourcesController');
 router.post('/', 
   resourcesController.addResources,
   (req, res) => {  
-    res.sendStatus(200);
+    res.status(200).json({resource: res.locals.resource });
   });
-
-router.get('/:resourceId', 
-  resourcesController.getResource,
-  (req, res) => {
-    res.status(200).json({resource: res.locals.resource})
-  });
-
-router.get('/pinned/:username', 
-  resourcesController.getPinnedResources,
-  (req, res) => {
-    res.status(200).json({pinnedResources: res.locals.pinnedResources})
-  })
 
 router.post('/pinned/:resourceId',
   resourcesController.pinResource,
@@ -34,10 +22,22 @@ router.delete('/pinned/:resourceId',
     res.sendStatus(200);
   });
 
-router.get('/owned/:username', 
+router.get('/owned', 
   resourcesController.getOwnedResources,
   (req, res) => {
     res.status(200).json({ownedResources: res.locals.ownedResources})
+  });
+
+router.get('/pinned', 
+  resourcesController.getPinnedResources,
+  (req, res) => {
+    res.status(200).json({pinnedResources: res.locals.pinnedResources})
+  });
+
+router.get('/:resourceId', 
+  resourcesController.getResource,
+  (req, res) => {
+    res.status(200).json({resource: res.locals.resource})
   });
 
 router.get('/', 

@@ -11,6 +11,8 @@ const resourcesRouter = require('./routes/resources.js');
 const tagsRouter = require('./routes/tags.js');
 const usersRouter = require('./routes/users.js');
 
+app.use(express.json());
+
 // TO DO: make sure this file structure is correct
 // static file serving if in production
 if (process.env.NODE_ENV === 'production') {
@@ -20,6 +22,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+/////////////////////
+/// DUMMY USERNAME FOR TESTS
+// app.use((req, res, next) => {
+//   res.locals.username = 'dummySam';
+//   return next();
+// })
 
 /** 
  * Define route handlers

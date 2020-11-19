@@ -9,12 +9,13 @@ notesController.addNote = async (req, res, next) => {
 
   const query = `
     INSERT INTO notes (content, owner_id, resource_id)
-      VALUES ($1, (SELECT _id FROM users WHERE username = $2), $3);
+      VALUES ($1, (SELECT _id FROM users WHERE username = $2), $3)
+      RETURNING _id;
   `;
 
   try {
-    const dbResponse = await db.query(query, [noteBody, userName, resourceId]);
-    
+    const dbResponse = await db.query(query, [noteBody, username, resourceId]);
+    res.locals.note = dbResponse.rows[0];
     return next();
   } catch (error) {
     return next({
@@ -99,7 +100,7 @@ notesController.getOwnedNotes = async (req, res, next) => {
 
   try {
     const dbResponse = await db.query(query, [username]);
-    res.locals.pinnedNotes = dbResponse.rows;
+    res.locals.ownedNotes = dbResponse.rows;
     return next();
   } catch (error) {
     return next({

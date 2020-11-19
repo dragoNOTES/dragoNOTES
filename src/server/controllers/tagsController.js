@@ -21,7 +21,7 @@ tagsController.getPinnedTags = (req, res, next) => {
   const { username } = res.locals;
 
   const query = `
-    SELECT name FROM user_pinned_tags upt
+    SELECT t.name AS name FROM user_pinned_tags upt
     INNER JOIN users u ON upt.user_id = u._id
     INNER JOIN tags t ON upt.tags_id = t._id
     WHERE u.username = $1;

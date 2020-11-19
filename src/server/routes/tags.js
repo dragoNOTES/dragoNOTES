@@ -4,13 +4,6 @@ const router = express.Router();
 
 const tagsController = require('../controllers/tagsController');
 
-
-router.get('/',
-  tagsController.getTags,
-  (req, res) => {
-    res.status(200).json({tags: res.locals.tags});
-  });
-
 router.get('/pinned', 
   tagsController.getPinnedTags,
   (req, res) => {
@@ -40,6 +33,12 @@ router.delete('/:tag',
   tagsController.removeTagFromResource,
   (req, res) => {
     res.sendStatus(200);
+  });
+
+router.get('/',
+  tagsController.getTags,
+  (req, res) => {
+    res.status(200).json({tags: res.locals.tags});
   });
 
   module.exports = router;

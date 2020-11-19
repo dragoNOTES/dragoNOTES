@@ -9,12 +9,14 @@ resourcesController.addResources = (req, res, next) => {
 
   const query = `
     INSERT INTO resources (link, title, owner_id)
-    VALUES ($1, $2, (SELECT _id FROM users WHERE username = $1));
+    VALUES ($1, $2, (SELECT _id FROM users WHERE username = $3))
+    ON CONFLICT DO NOTHING
+    RETURNING link, title, _id;
   `;
 
   db.query(query, [link, title, username])
     .then((response) => {
-      res.locals.resources = response.rows;
+      res.locals.resource = response.rows[0];
       return next()
     })
     .catch((error) => next({
@@ -48,10 +50,11 @@ resourcesController.getPageResources = (req, res, next) => {
   }
   
   const PAGE_AMOUNT = 10;
-  const offset = pageNumber * PAGE_AMOUNT;
+  const offset = page * PAGE_AMOUNT;
 
   const query = `
-    SELECT * FROM tagged_resources tr
+    SELECT link, title, t.name AS tag_name, r.created_at, num_notes, num_pinned, r._id AS id
+    FROM tagged_resources tr
     INNER JOIN tags t ON tr.tags_id = t._id
     INNER JOIN resources r ON tr.resource_id = r._id
     WHERE t.name = $1
@@ -75,7 +78,7 @@ resourcesController.getPinnedResources = (req, res, next) => {
   const { username } = res.locals;
 
   const query = `
-    SELECT * FROM user_pinned_resources upr
+    SELECT link, title, r._id AS id FROM user_pinned_resources upr
     INNER JOIN users u ON upr.user_id = u._id
     INNER JOIN resources r ON upr.resource_id = r._id
     WHERE u.username = $1;
@@ -84,7 +87,7 @@ resourcesController.getPinnedResources = (req, res, next) => {
   db.query(query, [username])
     .then((response) => {
       res.locals.pinnedResources = response.rows;
-      return next()
+      return next();
     })
     .catch((error) => next({
       error,
@@ -123,7 +126,7 @@ resourcesController.pinResource = (req, res, next) => {
 
   const query = `
     INSERT INTO user_pinned_resources (user_id, resource_id)
-    VALUES ((SELECT _id FROM users WHERE username=$1), $2);
+    VALUES ((SELECT _id FROM users WHERE username=$1), $2)
     ON CONFLICT DO NOTHING;
   `;
 

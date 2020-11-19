@@ -19,33 +19,34 @@ router.delete('/pinned/:noteId',
 router.post('/', 
   notesController.addNote,
   (req, res) => {
-    res.sendStatus(200);
+    res.status(200).json({note: res.locals.note});
+  })
+
+router.get('/owned', 
+  notesController.getOwnedNotes,
+  (req, res) => {
+    res.status(200).json({ownedNotes: res.locals.ownedNotes})
+  })
+
+router.get('/pinned', 
+  notesController.getPinnedNotes,
+  (req, res) => {
+    res.status(200).json({pinnedNotes: res.locals.pinnedNotes})
   })
 
 // are we ever actually just grabbing a random note?
 router.get('/:noteId', 
   notesController.getNote,
   (req, res) => {
-    res.sendStatus(200)
+    res.status(200).json({note: res.locals.note});
   })
 
-router.get('/?resource=resouceId', 
+router.get('/', 
   notesController.getResourceNotes,
   (req, res) => {
-    res.status(200).json({resourceNotes: resourceNotes})
+    res.status(200).json({resourceNotes: res.locals.resourceNotes})
   })
 
-router.get('/pinned/:username', 
-  notesController.getPinnedNotes,
-  (req, res) => {
-    res.status(200).json({pinnedNotes: pinnedNotes})
-  })
-
-router.get('/owned/:username', 
-  notesController.getOwnedNotes,
-  (req, res) => {
-    res.status(200).json({ownedNotes: ownedNotes})
-  })
 
 router.put('/:noteId', 
   notesController.updateNote,
