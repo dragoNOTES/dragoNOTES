@@ -19,5 +19,4 @@ export default {
     await wait(500);
     return createNote({ resourceID, content });
   },
-
 };
