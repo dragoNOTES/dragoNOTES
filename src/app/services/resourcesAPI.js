@@ -1,24 +1,20 @@
 export default {
-  async create({ title, url, tags }) {
+  async create({ title, link }) {
     //MJ: currently not using tags no backend funcitonality
     const res = await fetch('/api/resources', {
       method: 'POST',
-      body: JSON.stringify({
-        title,
-        link: url,
-        tags,
-      }),
+      body: JSON.stringify({ title, link }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    const data = await res.json();  
-    return data.resources;
+    const data = await res.json();
+    return data.resource;
   },
 
   async fetchByID(id) {
     const res = await fetch(`/api/resources/${id}`);
-    const data = await res.json();  
+    const data = await res.json();
     return data.resource;
   },
 
