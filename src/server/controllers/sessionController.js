@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const SECRET = process.env.COOKIE_SECRET;
 const EXPIRATION_TIME_IN_SECS = 60 * 60 * 24 * 3;
 
@@ -23,6 +24,7 @@ sessionController.setJWT = (req, res, next) => {
 
   jwt.sign(payload, SECRET, jwtOptions, (err, token) => {
     if (err) return next(err);
+    console.log("HELLOOOO");
     res.cookie('jwt', token, cookieOptions);
     return next();
   });

@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
@@ -13,6 +15,7 @@ const tagsRouter = require('./routes/tags.js');
 const usersRouter = require('./routes/users.js');
 
 app.use(express.json());
+app.use(cookieParser());
 
 // TO DO: make sure this file structure is correct
 // static file serving if in production

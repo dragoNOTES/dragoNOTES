@@ -9,7 +9,7 @@ const client_secret = process.env.GITHUB_CLIENT_SECRET;
 const authController = {};
 
 authController.authWithGithub = (req, res, next) => {
-  const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:8080/auth/callback`;
+  const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:3000/auth/callback`;
   res.redirect(url);
 };
 
