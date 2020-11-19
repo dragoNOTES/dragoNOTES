@@ -26,7 +26,6 @@ authController.getAccessToken = async (code) => {
     }),
   });
   const data = await res.text();
-  console.log(data);
   const params = new URLSearchParams(data);
   return params.get('access_token');
 }
@@ -46,8 +45,6 @@ authController.githubCallback = async (req, res, next) => {
   const token = await authController.getAccessToken(code);
   const githubData = await authController.getGithubUser(token);
   if (githubData) {
-    console.log('this is the githubdata:', githubData);
-
     res.locals.userId = githubData.id;
     res.locals.username = githubData.login;
     res.locals.name = githubData.name;

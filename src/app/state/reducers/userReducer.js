@@ -34,9 +34,9 @@ const userSlice = createSlice({
 
   // NOTE: Functions in here are automatically converted to action creators, which can be passed to `dispatch()`
   reducers: {
-    setLoggedIn(state, { payload: loggedIn }) {
-      state.isLoggedIn = loggedIn;
-    },
+    // setLoggedIn(state, { payload: loggedIn }) {
+    //   state.isLoggedIn = loggedIn;
+    // },
   },
 
   // NOTE: Functions in here will NOT be automatically converted to action creators
@@ -44,9 +44,15 @@ const userSlice = createSlice({
     [fetchUserData.pending]: setLoading,
     [fetchUserData.fulfilled]: (state, action) => {
       state.loading = false;
-      state.avatarUrl = action.payload.avatarUrl;
-      state.username = action.payload.username;
-      state.name = action.payload.name;
+      console.log(action);
+      if (action.payload.isLoggedIn === false) {
+        state.isLoggedIn = false;
+      } else {
+        state.isLoggedIn = true;
+        state.avatarUrl = action.payload.user.avatar;
+        state.username = action.payload.user.username;
+        state.name = action.payload.user.name;
+      }
     },
   },
 });

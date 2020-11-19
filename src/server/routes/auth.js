@@ -12,7 +12,7 @@ router.get('/callback',
   sessionController.setJWT,
   userController.addUser,
   (req, res) => {
-    return res.redirect('/');
+    return res.redirect('http://localhost:8080');
   }
 );
 
