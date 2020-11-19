@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const SECRET = process.env.COOKIE_SECRET;
 const EXPIRATION_TIME_IN_SECS = 60 * 60 * 24 * 3;
 
@@ -23,21 +24,22 @@ sessionController.setJWT = (req, res, next) => {
 
   jwt.sign(payload, SECRET, jwtOptions, (err, token) => {
     if (err) return next(err);
+    console.log("HELLOOOO");
     res.cookie('jwt', token, cookieOptions);
     return next();
   });
 };
 
 sessionController.validateSession = (req, res, next) => {
-  const redirect = () => res.redirect('/login');
+  const reject = () => res.sendStatus(401);
 
-  if (!req.cookies) return redirect();
+  if (!req.cookies) return reject();
 
   const token = req.cookies.jwt;
-  if (!token) return redirect();
+  if (!token) return reject();
 
   jwt.verify(token, SECRET, (err, decoded) => {
-    if (err) return redirect();
+    if (err) return reject();
 
     const { username } = decoded;
     res.locals.username = username;
