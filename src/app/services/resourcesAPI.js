@@ -1,76 +1,83 @@
-import { wait, createResource, createTag } from '../utils';
 
 export default {
   async create({ title, url, tags }) {
-    // TODO: create a new resource with the given tags
-    await wait(500);
-    return createResource({ title, url, tags });
+    //MJ: currently not using tags no backend funcitonality
+    fetch('/api/resources', {
+      method: 'POST', 
+      body: JSON.stringify({ 
+        title,
+        link: url
+        tags,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.resources 
+      })
   },
 
   async fetchByID(id) {
-    // TODO: return a resource by its id
-    await wait(500);
-    return createResource({
-      title: 'Redux Toolkit - Advanced Tutorial',
-      url: 'https://redux-toolkit.js.org/tutorials/advanced-tutorial',
-      tags: [createTag({ name: 'redux' })],
-      _id: id,
-    });
+    fetch(`/api/resources/${id}`, {
+      method: 'GET', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.resource 
+      })
   },
 
   async fetchPinned() {
-    // TODO: return the currently logged in user's pinned resources
-    await wait(500);
-    return [
-      createResource({
-        title: 'Redux - Learn This Stuff',
-        url: 'http://reduxiseasy.io/learn-this-stuff',
-        tags: [createTag({ name: 'redux' })],
-      }),
-      createResource({
-        title: 'Redux Toolkit - Advanced Tutorial',
-        url: 'https://redux-toolkit.js.org/tutorials/advanced-tutorial',
-        tags: [createTag({ name: 'redux' })],
-      }),
-    ];
+    fetch('/api/resources/pinned', {
+      method: 'GET', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.pinnedResources 
+      })
   },
 
-  async fetchByTags(...tags) {
-    // TODO: fetch resources with the given tags
-    await wait(500);
-    return [
-      createResource({
-        title: 'Redux - Learn This Stuff',
-        url: 'http://reduxiseasy.io/learn-this-stuff',
-        tags: [...tags],
-      }),
-      createResource({
-        title: 'Redux Toolkit - Advanced Tutorial',
-        url: 'https://redux-toolkit.js.org/tutorials/advanced-tutorial',
-        tags: [...tags],
-      }),
-    ];
+  async fetchByTags(tag, page = 0) {
+    fetch(`/api/resources?tag=${tag}&page=${page}`, {
+      method: 'GET', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.resources 
+      })
   },
 
-  async deleteByID(id) {
-    // TODO: delete a resource by its id
-    await wait(500);
-    return createResource({
-      title: 'Redux Toolkit - Advanced Tutorial',
-      url: 'https://redux-toolkit.js.org/tutorials/advanced-tutorial',
-      tags: [createTag({ name: 'redux' })],
-      _id: id,
-    });
-  },
+  // async deleteByID(id) {
+  //   fetch(`/api/resources/${id}`, {
+  //     method: 'DELETE', 
+  //     body: JSON.stringify({}),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     }
+  //   })
+  // },
 
   async pinByID(id) {
-    // TODO: add a resource to the currently logged in user's pinned resources by it's id
-    await wait(500);
-    return createResource({
-      title: 'Redux Toolkit - Advanced Tutorial',
-      url: 'https://redux-toolkit.js.org/tutorials/advanced-tutorial',
-      tags: [createTag({ name: 'redux' })],
-      _id: id,
-    });
+    fetch(`/api/resources/pinned/${id}`, {
+      method: 'POST', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
   },
 };
