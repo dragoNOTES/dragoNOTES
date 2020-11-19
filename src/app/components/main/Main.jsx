@@ -3,7 +3,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ResourceList from './ResourceList';
-import { fetchResourcesByTags } from '../../state/reducers/resourcesReducer';
+import { fetchResourcesByTagName } from '../../state/reducers/resourcesReducer';
 
 const capitalize = (str) =>
   str.length ? str[0].toUpperCase() + str.slice(1) : '';
@@ -25,7 +25,7 @@ export default function Main() {
   );
 
   useEffect(() => {
-    dispatch(fetchResourcesByTags(queryResultTags));
+    dispatch(fetchResourcesByTagName(queryResultTags[0]?.name || ''));
   }, [queryResultTags, dispatch]);
 
   return (

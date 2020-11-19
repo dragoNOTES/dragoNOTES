@@ -10,11 +10,11 @@ export default {
         return data.resourceNotes;
       });
   },
-  async create({ resourceId, content }) {
+  async create({ resourceID, content }) {
     return fetch('/api/notes', {
       method: 'POST',
       body: JSON.stringify({
-        resourceId,
+        resourceId: resourceID,
         noteBody: content,
       }),
       headers: {

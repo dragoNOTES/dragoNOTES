@@ -44,7 +44,7 @@ export default {
       });
   },
 
-  async fetchByTags(tagName, page = 0) {
+  async fetchByTag({ tagName, page = 0 }) {
     return fetch(`/api/resources?tag=${tagName}&page=${page}`, {
       method: 'GET',
     })

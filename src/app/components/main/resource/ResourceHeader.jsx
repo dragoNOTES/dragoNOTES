@@ -48,7 +48,7 @@ export default function ResourceHeader({ resource, onToggle, isOpen }) {
         </Link>
       </VStack>
       <Spacer />
-      <TagList tags={resource.tags} />
+      <TagList tags={[{ name: resource.tag_name }]} />
     </Flex>
   );
 }
