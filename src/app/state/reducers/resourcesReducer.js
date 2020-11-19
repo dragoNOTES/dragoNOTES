@@ -9,10 +9,10 @@ export const createResource = createAsyncThunk(
   }
 );
 
-export const fetchResourcesByTags = createAsyncThunk(
-  'resources/fetchByTags',
-  async (tags) => {
-    const resources = await resourcesAPI.fetchByTags(tags[0].name);
+export const fetchResourcesByTagName = createAsyncThunk(
+  'resources/fetchByTagName',
+  async (tagName) => {
+    const resources = await resourcesAPI.fetchByTag({ tagName, page: 0 });
     return resources;
   }
 );
@@ -41,7 +41,7 @@ const resourceSlice = createSlice({
   name: 'resources',
   initialState: {
     loading: false,
-    // will contain the resources from the fetchResourcesByTags call
+    // will contain the resources from the fetchResourcesByTag call
     resourcesByTag: [],
     // pinned resources
     pinned: [],
@@ -49,7 +49,7 @@ const resourceSlice = createSlice({
   reducers: {},
   extraReducers: {
     [createResource.pending]: setLoading,
-    [fetchResourcesByTags.pending]: setLoading,
+    [fetchResourcesByTagName.pending]: setLoading,
     [pinResourceByID.pending]: setLoading,
     [fetchPinnedResources.pending]: setLoading,
     [createResource.fulfilled]: (state, { payload: resource }) => {
@@ -57,7 +57,7 @@ const resourceSlice = createSlice({
 
       state.resourcesByTag.push(resource);
     },
-    [fetchResourcesByTags.fulfilled]: (state, { payload: resources }) => {
+    [fetchResourcesByTagName.fulfilled]: (state, { payload: resources }) => {
       state.loading = false;
 
       state.resourcesByTag = resources;
@@ -67,7 +67,7 @@ const resourceSlice = createSlice({
 
       const { resource } = payload;
       const alreadyPinnedIndex = state.pinned.findIndex(
-        ({ _id }) => _id === resource._id
+        ({ _id }) => _id === resource.id
       );
 
       if (alreadyPinnedIndex > -1) {

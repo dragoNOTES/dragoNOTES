@@ -15,7 +15,7 @@ const AddNoteButton = ({ onClick }) => (
 
 export default function ResourceBody({ resource, ...props }) {
   const notes = useSelector(
-    (state) => state.notes.notesByResource[resource._id] ?? []
+    (state) => state.notes.notesByResource[resource.id] ?? []
   );
 
   const [isComposingNote, setIsComposingNote] = useState(false);
@@ -29,7 +29,7 @@ export default function ResourceBody({ resource, ...props }) {
         {isComposingNote ? (
           <NoteEditor
             onClose={() => setIsComposingNote(false)}
-            resourceID={resource._id}
+            resourceID={resource.id}
           />
         ) : (
           <AddNoteButton onClick={onAddNote} />

@@ -36,14 +36,14 @@ const noteSlice = createSlice({
       { payload: { resourceID, notes } }
     ) => {
       state.loading = false;
-      state.notesByResource[resourceID] = notes;
+      state.notesByResource[resourceID] = notes.reverse();
     },
     [createNote.fulfilled]: (state, { payload: note }) => {
       console.log(note);
       state.loading = false;
-      state.notesByResource[note.resourceID] = [
+      state.notesByResource[note.resource_id] = [
         note,
-        ...(state.notesByResource[note.resourceID] || []),
+        ...(state.notesByResource[note.resource_id] || []),
       ];
     },
   },

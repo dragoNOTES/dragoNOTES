@@ -7,7 +7,7 @@ export default function TagList({ tags }) {
     <HStack spacing={4}>
       {tags.map((tag) => (
         <Tag
-          key={tag._id}
+          key={tag.name}
           borderRadius="full"
           variant="solid"
           colorScheme="purple"

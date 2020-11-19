@@ -8,13 +8,13 @@ import tagsAPI from '../../services/tagsAPI';
 //           based on the promise you return, and action types that you can handle in your reducers"
 //       Reference: https://redux-toolkit.js.org/usage/usage-guide#async-requests-with-createasyncthunk
 export const createTag = createAsyncThunk('tags/create', async ({ name }) => {
-  const response = await tagsAPI.create({ name });
-  return response;
+  const tag = await tagsAPI.create({ name });
+  return tag;
 });
 
 export const fetchAllTags = createAsyncThunk('tags/fetchAll', async () => {
-  const response = await tagsAPI.fetchAll();
-  return response;
+  const tags = await tagsAPI.fetchAll();
+  return tags;
 });
 
 const setLoading = (state) => {
@@ -50,9 +50,9 @@ const tagsSlice = createSlice({
   // NOTE: Functions in here will NOT be automatically converted to action creators
   extraReducers: {
     [fetchAllTags.pending]: setLoading,
-    [fetchAllTags.fulfilled]: (state, action) => {
+    [fetchAllTags.fulfilled]: (state, { payload: tags }) => {
       state.loading = false;
-      state.tags = action.payload;
+      state.tags = tags;
     },
     [createTag.pending]: setLoading,
     [createTag.fulfilled]: (state, { payload: tag }) => {
