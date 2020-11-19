@@ -3,10 +3,6 @@ export default {
   async fetchByResource(id) {
     fetch(`/api/notes?resourceId=${id}`, {
       method: 'GET', 
-      body: JSON.stringify({}),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
       .then((response) => { return response.json() })
       .then(data => {
@@ -32,10 +28,6 @@ export default {
   async fetchByID(id) {
     fetch(`/api/notes/${id}`, {
       method: 'GET', 
-      body: JSON.stringify({}),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
       .then((response) => { return response.json() })
       .then(data => {

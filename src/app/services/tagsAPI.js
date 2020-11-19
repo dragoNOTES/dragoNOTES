@@ -4,10 +4,6 @@ export default {
     // TODO: fill with actual fetch request from api MJ -> Is this correct?
     fetch('/api/tags', {
       method: 'GET', 
-      body: JSON.stringify({}),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
       .then((response) => { return response.json() })
       .then(data => {

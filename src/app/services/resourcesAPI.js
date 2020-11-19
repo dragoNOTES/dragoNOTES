@@ -22,10 +22,6 @@ export default {
   async fetchByID(id) {
     fetch(`/api/resources/${id}`, {
       method: 'GET', 
-      body: JSON.stringify({}),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
       .then((response) => { return response.json() })
       .then(data => {
@@ -36,10 +32,6 @@ export default {
   async fetchPinned() {
     fetch('/api/resources/pinned', {
       method: 'GET', 
-      body: JSON.stringify({}),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
       .then((response) => { return response.json() })
       .then(data => {
@@ -50,10 +42,6 @@ export default {
   async fetchByTags(tag, page = 0) {
     fetch(`/api/resources?tag=${tag}&page=${page}`, {
       method: 'GET', 
-      body: JSON.stringify({}),
-      headers: {
-        'Content-Type': 'application/json',
-      }
     })
       .then((response) => { return response.json() })
       .then(data => {
