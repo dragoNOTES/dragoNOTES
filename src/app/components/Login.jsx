@@ -21,13 +21,9 @@ export default class Login extends Component {
     };
   }
 
-  // app.get('/login/github', (req, res) => {
-  //   const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:9000/login/github/callback`;
-  //   res.redirect(url);
-  // });
-
+  
   componentDidMount() {
-    this.loginFetch();
+    // this.loginFetch();
   }
 
   loginFetch() {
@@ -45,7 +41,7 @@ export default class Login extends Component {
           <Container>
             <Center>
               <VStack>
-                <Button colorScheme="teal" variant="solid">
+                <Button onClick= colorScheme="teal" variant="solid">
                   GitHub OAuth
                 </Button>
                 <Input placeholder="Username" />

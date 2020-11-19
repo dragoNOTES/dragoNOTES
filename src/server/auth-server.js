@@ -16,11 +16,11 @@ const cookie_secret = process.env.COOKIE_SECRET;
 // that is in the .env file
 // no database is required because data is stored in encrypted cookie
 
-app.use(
-  cookieSession({
-    secret: cookie_secret,
-  })
-);
+// app.use(
+//   cookieSession({
+//     secret: cookie_secret,
+//   })
+// );
 
 // TEST: ensures that client_id and client_secret exist
 console.log({ client_id, client_secret });
@@ -82,8 +82,8 @@ app.get('/login/github/callback', async (req, res) => {
   const githubData = await getGithubUser(token);
   if (githubData) {
     console.log('this is the githubdata:', githubData);
-    req.session.githubId = githubData.id;
-    req.session.token = token;
+    // req.session.githubId = githubData.id;
+    // req.session.token = token;
     res.redirect(`/admin?code=${code}`);
   } else {
     console.log('Error');
@@ -95,20 +95,20 @@ app.get('/login/github/callback', async (req, res) => {
 // otherwise give them a link that redirects them to the login
 
 app.get('/admin', (req, res) => {
-  if (req.session.githubId === req.query.code) {
-    res.send(`Hey Jon <pre>${JSON.stringify(req.session)}`);
-  } else {
-    res.send('Not authorized, <a href="/login/github">login</a>');
-  }
+  // if (req.session.githubId === 66573803) {
+  res.send(`Hey Jon <pre>${JSON.stringify(req.session)}`);
+  // } else {
+  // res.send('Not authorized, <a href="/login/github">login</a>');
+  // }
 });
 
 // LOGOUT: upon logging out, cookie is set to null, session is terminated
 // user is redirected back to the homepage
 
-app.get('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
-});
+// app.get('/logout', (req, res) => {
+//   req.session = null;
+//   res.redirect('/');
+// });
 
 // listening on PORT 9000
 const PORT = process.env.PORT || 8080;
