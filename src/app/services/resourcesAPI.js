@@ -35,19 +35,19 @@ export default {
     ];
   },
 
-  async fetchByTags(...tags) {
+  async fetchByTags(tags) {
     // TODO: fetch resources with the given tags
     await wait(500);
     return [
       createResource({
         title: 'Redux - Learn This Stuff',
         url: 'http://reduxiseasy.io/learn-this-stuff',
-        tags: [...tags],
+        tags,
       }),
       createResource({
         title: 'Redux Toolkit - Advanced Tutorial',
         url: 'https://redux-toolkit.js.org/tutorials/advanced-tutorial',
-        tags: [...tags],
+        tags,
       }),
     ];
   },

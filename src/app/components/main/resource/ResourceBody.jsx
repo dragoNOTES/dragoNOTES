@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
-import { Flex, Box, VStack, Button } from '@chakra-ui/react';
+import { Box, VStack, Button, Text } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
+import { useSelector } from 'react-redux';
 
 import Note from '../note/Note';
 import NoteEditor from '../note/NoteEditor';
-
-// TODO: this is mock data
-import { notes } from '../../../mock-data';
 
 const AddNoteButton = ({ onClick }) => (
   <Button {...{ onClick }} leftIcon={<AddIcon />} variant="outline" isFullWidth>
@@ -16,8 +14,11 @@ const AddNoteButton = ({ onClick }) => (
 );
 
 export default function ResourceBody({ resource, ...props }) {
-  const [isComposingNote, setIsComposingNote] = useState(false);
+  const notes = useSelector(
+    (state) => state.notes.notesByResource[resource._id] ?? []
+  );
 
+  const [isComposingNote, setIsComposingNote] = useState(false);
   const onAddNote = () => {
     setIsComposingNote(true);
   };
@@ -26,13 +27,18 @@ export default function ResourceBody({ resource, ...props }) {
     <Box {...props} ml={10} maxW="100%">
       <VStack spacing={5}>
         {isComposingNote ? (
-          <NoteEditor onClose={() => setIsComposingNote(false)} />
+          <NoteEditor
+            onClose={() => setIsComposingNote(false)}
+            resourceID={resource._id}
+          />
         ) : (
           <AddNoteButton onClick={onAddNote} />
         )}
-        {notes.map((note) => (
-          <Note key={note._id} {...{ note }} />
-        ))}
+        {notes.length ? (
+          notes.map((note) => <Note key={note._id} {...{ note }} />)
+        ) : (
+          <Text>☹️ No Notes</Text>
+        )}
       </VStack>
     </Box>
   );

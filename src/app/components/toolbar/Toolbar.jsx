@@ -16,7 +16,7 @@ export default function Toolbar() {
     >
       <Flex>
         <Text fontSize="2xl" fontWeight="500">
-          🐉 DragoNotes{' '}
+          🐉 DragoNotes
         </Text>
       </Flex>
 

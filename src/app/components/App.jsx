@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { Flex } from '@chakra-ui/react';
 
@@ -7,16 +6,15 @@ import Toolbar from './toolbar/Toolbar';
 import Sidebar from './sidebar/Sidebar';
 import Main from './main/Main';
 
+import { useDispatch } from 'react-redux';
 import { fetchAllTags } from '../state/reducers/tagsReducer';
-import { fetchUserData } from '../state/reducers/userReducer';
 
 export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserData());
     dispatch(fetchAllTags());
-  }, []);
+  });
 
   return (
     <Flex h="100vh" maxH="100vh" direction="column">

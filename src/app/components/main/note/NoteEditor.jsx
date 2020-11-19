@@ -1,7 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { Flex, Button, ButtonGroup, Textarea } from '@chakra-ui/react';
 import { CloseIcon, CheckIcon } from '@chakra-ui/icons';
+import { useDispatch } from 'react-redux';
+
+import { createNote } from '../../../state/reducers/notesReducer';
 
 // TODO: configure the slate editor properly. definitely bring this out into it's own file
 // // Import the Slate editor factory.
@@ -26,7 +29,15 @@ import { CloseIcon, CheckIcon } from '@chakra-ui/icons';
 //   );
 // };
 
-export default function NoteEditor({ onClose }) {
+export default function NoteEditor({ onClose, resourceID }) {
+  const dispatch = useDispatch();
+  const [body, setBody] = useState('');
+
+  const onSave = () => {
+    dispatch(createNote({ content: body, resourceID }));
+    onClose();
+  };
+
   return (
     <Flex
       w="100%"
@@ -37,14 +48,18 @@ export default function NoteEditor({ onClose }) {
       rounded="md"
       boxShadow="lg"
     >
-      <Textarea placeholder="My new beautiful note..." />
+      <Textarea
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+        placeholder="My new beautiful note..."
+      />
       {/* <Editor /> */}
       <Flex mt={5} justifyContent="flex-end">
         <ButtonGroup variant="solid" isAttached>
           <Button onClick={onClose} leftIcon={<CloseIcon />} colorScheme="gray">
             Cancel
           </Button>
-          <Button leftIcon={<CheckIcon />} colorScheme="green">
+          <Button onClick={onSave} leftIcon={<CheckIcon />} colorScheme="green">
             Save
           </Button>
         </ButtonGroup>

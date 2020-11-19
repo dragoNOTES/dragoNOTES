@@ -13,7 +13,7 @@ export const fetchNotesByResourceID = createAsyncThunk(
   'notes/fetchByResourceID',
   async (resourceID) => {
     const notes = await notesAPI.fetchByResource(resourceID);
-    return notes;
+    return { resourceID, notes };
   }
 );
 
@@ -25,19 +25,26 @@ const noteSlice = createSlice({
   name: 'notes',
   initialState: {
     loading: false,
-    notes: [],
+    notesByResource: {},
   },
   reducers: {},
   extraReducers: {
     [fetchNotesByResourceID.pending]: setLoading,
     [createNote.pending]: setLoading,
-    [fetchNotesByResourceID.fulfilled]: (state, { payload: notes }) => {
+    [fetchNotesByResourceID.fulfilled]: (
+      state,
+      { payload: { resourceID, notes } }
+    ) => {
       state.loading = false;
-      state.notes = notes;
+      state.notesByResource[resourceID] = notes;
     },
     [createNote.fulfilled]: (state, { payload: note }) => {
+      console.log(note);
       state.loading = false;
-      state.notes.push(note);
+      state.notesByResource[note.resourceID] = [
+        note,
+        ...(state.notesByResource[note.resourceID] || []),
+      ];
     },
   },
 });
