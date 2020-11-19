@@ -17,6 +17,24 @@ userController.addUser = (req, res, next) => {
       error,
       log: `Error in userController addUser`,
     }));
+};
+
+userController.getUserData = (req, res, next) => {
+  const { username } = res.locals;
+
+  const query = `
+    SELECT * FROM users WHERE username = $1;
+  `;
+
+  db.query(query, [username])
+    .then((response) => {
+      res.locals.userData = response.rows[0];
+      return next();
+    })
+    .catch((error) => next({
+      error,
+      log: `Error in userController getUserData`,
+    }));
 }
 
 module.exports = userController; 

@@ -40,7 +40,8 @@ tagsController.getPinnedTags = (req, res, next) => {
 
 tagsController.addNewTag = (req, res, next) => {
   // Create with req.body.tag 
-  const { tag } = req.body
+  let { tag } = req.body
+  tag = tag.toLowerCase();
 
   const query = `
     INSERT INTO tags (name) 
@@ -58,10 +59,12 @@ tagsController.addNewTag = (req, res, next) => {
 
 tagsController.addTagToResource = (req, res, next) => {
   // Create with req.body.tagName and req.body.resourceId
-  const { tag, resourceId } = req.body;
+  let { tag, resourceId } = req.body;
   if (!tag || !resourceId) {
     return res.status(400).send('bad request, need tag and resourceId in body');
   }
+
+  tag = tag.toLowerCase();
 
   const query = `
     INSERT INTO tagged_resources (resource_id, tags_id)
@@ -80,10 +83,13 @@ tagsController.addTagToResource = (req, res, next) => {
 tagsController.removeTagFromResource = (req, res, next) => {
   // Delete with req.query.tagId and req.query.resourceId
   const { resourceId } = req.query;
-  const { tag } = req.params;
+  let { tag } = req.params;
+
   if (!tag || !resourceId) {
     return res.status(400).send('bad requets, needs tag param and resourceId query param');
   }
+  
+  tag = tag.toLowerCase();
 
   const query = `
     DELETE FROM tagged_resources 
@@ -101,7 +107,8 @@ tagsController.removeTagFromResource = (req, res, next) => {
 
 tagsController.pinTag = (req, res, next) => {
   const { username } = res.locals;
-  const { tag } = req.params;
+  let { tag } = req.params;
+  tag = tag.toLowerCase();
 
   const query = `
     INSERT INTO user_pinned_tags (user_id, tags_id)
@@ -122,7 +129,8 @@ tagsController.pinTag = (req, res, next) => {
 
 tagsController.unpinTag = (req, res, next) => {
   const { username } = res.locals;
-  const { tag } = req.params;
+  let { tag } = req.params;
+  tag = tag.toLowerCase();
 
   const query = `
     DELETE FROM user_pinned_tags

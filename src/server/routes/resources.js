@@ -4,16 +4,16 @@ const router = express.Router();
 
 const resourcesController = require('../controllers/resourcesController');
 
-router.post('/', 
-  resourcesController.addResources,
-  (req, res) => {  
-    res.status(200).json({resource: res.locals.resource });
-  });
-
 router.post('/pinned/:resourceId',
   resourcesController.pinResource,
   (req, res) => {
     res.sendStatus(200);
+  });
+
+router.post('/', 
+  resourcesController.addResources,
+  (req, res) => {  
+    res.status(200).json({resource: res.locals.resource });
   });
 
 router.delete('/pinned/:resourceId',

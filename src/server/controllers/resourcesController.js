@@ -49,7 +49,7 @@ resourcesController.getPageResources = (req, res, next) => {
     return res.status(400).send('bad request, need tag and page query params');
   }
   
-  const PAGE_AMOUNT = 10;
+  const PAGE_AMOUNT = 100;
   const offset = page * PAGE_AMOUNT;
 
   const query = `

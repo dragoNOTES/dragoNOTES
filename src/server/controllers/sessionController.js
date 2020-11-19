@@ -24,7 +24,6 @@ sessionController.setJWT = (req, res, next) => {
 
   jwt.sign(payload, SECRET, jwtOptions, (err, token) => {
     if (err) return next(err);
-    console.log("HELLOOOO");
     res.cookie('jwt', token, cookieOptions);
     return next();
   });

@@ -1,50 +1,65 @@
-import { wait, createNote } from '../utils';
 
 export default {
   async fetchByResource(id) {
-    // TODO: return all notes associated with the given resource id
-    await wait(500);
-    return [
-      createNote({
-        resourceID: id,
-        content: 'Redux is awesome',
-      }),
-      createNote({
-        resourceID: id,
-        content: 'I like to use React',
-      }),
-    ];
+    fetch(`/api/notes?resourceId=${id}`, {
+      method: 'GET', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.resourceNotes 
+      })
   },
-  async create({ resourceID, content }) {
-    // TODO: create a new note on a given resource
-    await wait(500);
-    return createNote({ resourceID, content });
+  async create({ resourceId, content }) {
+    fetch('/api/notes', {
+      method: 'POST', 
+      body: JSON.stringify({
+        resourceId,
+        noteBody: content,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.note 
+      })  
   },
   async fetchByID(id) {
-    // TODO: return a note by its id
-    await wait(500);
-    return createNote({
-      resourceID: 1,
-      content: 'Redux is awesome',
-      _id: id,
-    });
+    fetch(`/api/notes/${id}`, {
+      method: 'GET', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => { return response.json() })
+      .then(data => {
+        return data.note 
+      })
   },
-  async deleteByID(id) {
-    // TODO: delete a note by its id
-    await wait(500);
-    return createNote({
-      resourceID: 1,
-      content: 'Redux is awesome',
-      _id: id,
-    });
-  },
+
   async pinByID(id) {
-    // TODO: add a note to the currently logged in user's pinned notes by it's id
-    await wait(500);
-    return createNote({
-      resourceID: 1,
-      content: 'Redux is awesome',
-      _id: id,
-    });
+    fetch(`/api/notes/pinned/${id}`, {
+      method: 'POST', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })    
+  },
+
+  async unpinByID(id) {
+    fetch(`/api/notes/pinned/${id}`, {
+      method: 'DELETE', 
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })    
   },
 };
