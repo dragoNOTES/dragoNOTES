@@ -43,8 +43,8 @@ export default function ResourceHeader({ resource, onToggle, isOpen }) {
         <Text fontWeight="500" fontSize="lg">
           {resource.title}
         </Text>
-        <Link href={resource.url} target="_blank" color="gray.500">
-          {resource.url}
+        <Link href={resource.link} target="_blank" color="gray.500">
+          {resource.link}
         </Link>
       </VStack>
       <Spacer />
