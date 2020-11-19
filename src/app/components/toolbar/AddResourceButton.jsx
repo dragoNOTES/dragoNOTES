@@ -6,11 +6,11 @@ import { AddIcon } from '@chakra-ui/icons';
 export default function AddResourceButton() {
   return (
     <Flex>
-        <IconButton 
-          variant="outline"
-          aria-label="Add Resources"
-          icon={<AddIcon/>}
-        />
+      <IconButton
+        variant="outline"
+        aria-label="Add Resources"
+        icon={<AddIcon />}
+      />
     </Flex>
-    );
+  );
 }
